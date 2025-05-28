@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artisans | स्वदेश | Meet the Makers</title>
+    <meta name="description" content="Discover the talented artisans behind our authentic Indian handicrafts and textiles">
+    
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Hindi Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Hind:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #800000; /* Maroon */
+            --primary-dark: #5a0000;
+            --secondary: #d4af37; /* Gold */
+            --accent: #e5d9b6; /* Cream */
+            --dark: #1a1a1a;
+            --light: #ffffff;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9f9f9;
+        }
+        
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .hindi-font {
+            font-family: 'Hind', sans-serif;
+        }
+        
+        .artisan-card {
+            transition: all 0.3s ease;
+            background-color: white;
+        }
+        
+        .artisan-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .craft-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--secondary);
+            color: var(--dark);
+            font-weight: bold;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        
+        .artisan-banner {
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        .artisan-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.7));
+        }
+        
+        .story-section {
+            background-color: var(--accent);
+        }
+        
+        .craft-timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .craft-timeline::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--primary);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -30px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: 2px solid white;
+        }
+    </style>
+</head>
+<body class="antialiased text-gray-900">
+    <!-- Announcement Bar -->
+    <div class="bg-gray-900 text-white text-sm py-2 px-4 text-center">
+        <p>🇮🇳 Support Indian artisans - 100% of profits go to makers | Use code <strong>ARTISAN10</strong> for 10% off 🇮🇳</p>
+    </div>
+
+    <!-- Main Navigation -->
+    <header class="sticky top-0 z-40 bg-white shadow-sm">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center space-x-2">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-r from-red-900 to-yellow-600 flex items-center justify-center text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-5-9h10v2H7z"/>
+                            <path d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/>
+                        </svg>
+                    </div>
+                    <span class="text-2xl font-bold font-display text-gray-900 hindi-font">स्वदेश</span>
+                </a>
+                
+                <!-- Desktop Search -->
+                <div class="hidden lg:flex flex-1 max-w-xl mx-6">
+                    <div class="relative w-full">
+                        <input type="text" placeholder="Search artisans by craft or region..." 
+                               class="w-full pl-4 pr-12 py-2 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-red-800 focus:border-transparent text-sm">
+                        <button class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-red-900 text-white p-2 rounded-full hover:bg-red-800 transition">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Navigation Links -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="products.html" class="text-gray-700 hover:text-red-900 transition nav-link">Shop</a>
+                    <a href="handicrafts.html" class="text-gray-700 hover:text-red-900 transition nav-link">Handicrafts</a>
+                    <a href="textiles.html" class="text-gray-700 hover:text-red-900 transition nav-link">Textiles</a>
+                    <a href="artisans.html" class="text-red-900 font-medium transition nav-link">Artisans</a>
+                </nav>
+                
+                <!-- User Actions -->
+                <div class="flex items-center space-x-4">
+                    <!-- Mobile Search Button -->
+                    <button id="mobileSearchBtn" class="lg:hidden text-gray-700">
+                        <i class="fas fa-search text-xl"></i>
+                    </button>
+                    
+                    <!-- Profile Dropdown -->
+                    <div class="relative group">
+                        <a href="profile.html" class="text-gray-700 hover:text-red-900">
+                            <i id="profileIcon" class="fas fa-user text-xl"></i>
+                        </a>
+                        <div class="absolute right-0 mt-2 w-56 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-10">
+                            <a href="profile.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">My Profile</a>
+                            <a href="orders.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">My Orders</a>
+                            <a href="wishlist.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Wishlist</a>
+                            <div class="border-t border-gray-200 my-1"></div>
+                            <a href="#" id="logoutBtn" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Cart Button -->
+                    <button id="cartBtn" class="relative text-gray-700 hover:text-red-900">
+                        <i class="fas fa-shopping-cart text-xl"></i>
+                        <span id="cartCount" class="absolute -top-2 -right-2 bg-red-900 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Search (hidden by default) -->
+            <div id="mobileSearch" class="lg:hidden hidden mt-3 mb-2">
+                <div class="relative">
+                    <input type="text" placeholder="Search artisans..." 
+                           class="w-full pl-4 pr-12 py-2 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-red-800 focus:border-transparent text-sm">
+                    <button class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-red-900 text-white p-2 rounded-full hover:bg-red-800 transition">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="artisan-banner" style="background-image: url('https://necessityestore.in/wp-content/uploads/2022/10/13.-India_s-Handicraft-Industry-Gaining-Momentum-10-Best-Corporate-Leaders-From-Jaipur-2021.jpg')">
+        <div class="container mx-auto px-4 h-full flex items-end pb-12 relative">
+            <div class="text-white max-w-2xl">
+                <h1 class="text-4xl md:text-5xl font-bold font-display mb-4">Meet the Makers</h1>
+                <p class="text-lg mb-6">Discover the skilled artisans behind our authentic Indian handicrafts and textiles. Each piece tells a story of tradition, skill, and cultural heritage.</p>
+                <a href="#featured" class="bg-red-900 hover:bg-red-800 text-white px-6 py-3 rounded-md inline-block transition">Explore Artisans</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Artisans -->
+    <section id="featured" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold font-display mb-4">Featured Artisans</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">These master craftspeople represent generations of traditional knowledge and exceptional skill</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Artisan 1 -->
+                <div class="artisan-card rounded-lg overflow-hidden shadow-sm relative">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80" alt="Rajesh Kumar" class="w-full h-full object-cover">
+                        <div class="craft-badge">Pottery</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-1">Rajesh Kumar</h3>
+                        <p class="text-gray-500 mb-3">Jaipur, Rajasthan</p>
+                        <p class="text-gray-700 mb-4">7th generation blue pottery artisan specializing in traditional Jaipur techniques</p>
+                        <div class="flex justify-between items-center">
+                            <a href="#rajesh" class="text-red-900 font-medium hover:underline">View Profile</a>
+                            <span class="text-sm text-gray-500">12 products</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Artisan 2 -->
+                <div class="artisan-card rounded-lg overflow-hidden shadow-sm relative">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://i0.wp.com/varanasivideos.com/wp-content/uploads/2018/12/Weaver-weaving-Banarasi-Saree.jpg?resize=1104%2C621" alt="Fatima Begum" class="w-full h-full object-cover">
+                        <div class="craft-badge">Textiles</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-1">Fatima Begum</h3>
+                        <p class="text-gray-500 mb-3">Varanasi, Uttar Pradesh</p>
+                        <p class="text-gray-700 mb-4">Master weaver of Banarasi silk sarees with 30 years of experience</p>
+                        <div class="flex justify-between items-center">
+                            <a href="#fatima" class="text-red-900 font-medium hover:underline">View Profile</a>
+                            <span class="text-sm text-gray-500">8 products</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Artisan 3 -->
+                <div class="artisan-card rounded-lg overflow-hidden shadow-sm relative">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://cdn.shopify.com/s/files/1/1865/3293/files/Saharanpur-11_large.jpg?v=1504640721" alt="Arun Mehta" class="w-full h-full object-cover">
+                        <div class="craft-badge">Wood Carving</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-1">Arun Mehta</h3>
+                        <p class="text-gray-500 mb-3">Srinagar, Kashmir</p>
+                        <p class="text-gray-700 mb-4">Expert in walnut wood carving using traditional Kashmiri techniques</p>
+                        <div class="flex justify-between items-center">
+                            <a href="#arun" class="text-red-900 font-medium hover:underline">View Profile</a>
+                            <span class="text-sm text-gray-500">15 products</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#" class="inline-block border border-red-900 text-red-900 hover:bg-red-50 px-6 py-3 rounded-md transition">View All Artisans</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Artisan Stories -->
+    <section class="story-section py-16">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold font-display mb-4">Artisan Stories</h2>
+                <p class="text-gray-700 max-w-2xl mx-auto">Behind every handmade product is a story of tradition, perseverance, and cultural heritage</p>
+            </div>
+            
+            <!-- Rajesh Kumar -->
+            <div id="rajesh" class="bg-white rounded-lg shadow-md overflow-hidden mb-16">
+                <div class="md:flex">
+                    <div class="md:w-1/3">
+                        <img src="https://static3.bigstockphoto.com/8/5/3/large1500/358349375.jpg" alt="Rajesh Kumar" class="w-full h-full object-cover">
+                    </div>
+                    <div class="md:w-2/3 p-8">
+                        <div class="flex items-center mb-4">
+                            <h3 class="text-2xl font-bold font-display">Rajesh Kumar</h3>
+                            <span class="ml-4 px-3 py-1 bg-red-100 text-red-900 rounded-full text-sm">Blue Pottery</span>
+                        </div>
+                        <p class="text-gray-500 mb-4">Jaipur, Rajasthan | 7th Generation Artisan</p>
+                        
+                        <div class="craft-timeline mb-6">
+                            <div class="timeline-item">
+                                <h4 class="font-bold mb-1">The Tradition</h4>
+                                <p class="text-gray-700">Blue pottery originated in Persia and was brought to India by Mughal artisans. My family has been practicing this craft in Jaipur for over 200 years.</p>
+                            </div>
+                            <div class="timeline-item">
+                                <h4 class="font-bold mb-1">The Process</h4>
+                                <p class="text-gray-700">Each piece is hand-shaped from a unique blend of quartz, glass, and multani mitti (Fuller's earth), then painted with cobalt oxide before firing at low temperatures.</p>
+                            </div>
+                            <div class="timeline-item">
+                                <h4 class="font-bold mb-1">The Challenge</h4>
+                                <p class="text-gray-700">With mass-produced ceramics flooding the market, we struggle to compete on price while maintaining our traditional methods and quality.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-wrap gap-4 mb-6">
+                            <a href="#" class="bg-red-900 hover:bg-red-800 text-white px-6 py-2 rounded-md transition">View Products</a>
+                            <a href="#" class="border border-red-900 text-red-900 hover:bg-red-50 px-6 py-2 rounded-md transition">Watch Documentary</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Fatima Begum -->
+            <div id="fatima" class="bg-white rounded-lg shadow-md overflow-hidden mb-16">
+                <div class="md:flex flex-row-reverse">
+                    <div class="md:w-1/3">
+                        <img src="https://i0.wp.com/varanasivideos.com/wp-content/uploads/2018/12/Weaver-weaving-Banarasi-Saree.jpg?resize=1104%2C621" alt="Fatima Begum" class="w-full h-full object-cover">
+                    </div>
+                    <div class="md:w-2/3 p-8">
+                        <div class="flex items-center mb-4">
+                            <h3 class="text-2xl font-bold font-display">Fatima Begum</h3>
+                            <span class="ml-4 px-3 py-1 bg-red-100 text-red-900 rounded-full text-sm">Banarasi Weaving</span>
+                        </div>
+                        <p class="text-gray-500 mb-4">Varanasi, Uttar Pradesh | Master Weaver</p>
+                        
+                        <div class="craft-timeline mb-6">
+                            <div class="timeline-item">
+                                <h4 class="font-bold mb-1">The Legacy</h4>
+                                <p class="text-gray-700">My family has been weaving Banarasi silks for generations. I learned the craft from my mother at age 12, sitting at the loom for hours each day.</p>
+                            </div>
+                            <div class="timeline-item">
+                                <h4 class="font-bold mb-1">The Art</h4>
+                                <p class="text-gray-700">A single saree can take 15-30 days to complete, with intricate zari work woven with real gold and silver threads. The patterns often depict Mughal motifs and nature.</p>
+                            </div>
+                            <div class="timeline-item">
+                                <h4 class="font-bold mb-1">The Future</h4>
+                                <p class="text-gray-700">I'm teaching my daughters the craft, but many young people leave for city jobs. We need more support to keep this heritage alive.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-wrap gap-4 mb-6">
+                            <a href="#" class="bg-red-900 hover:bg-red-800 text-white px-6 py-2 rounded-md transition">View Sarees</a>
+                            <a href="#" class="border border-red-900 text-red-900 hover:bg-red-50 px-6 py-2 rounded-md transition">Visit Workshop</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Arun Mehta -->
+            <div id="arun" class="bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="md:flex">
+                    <div class="md:w-1/3">
+                        <img src="https://cdn.shopify.com/s/files/1/1865/3293/files/Saharanpur-11_large.jpg?v=1504640721" alt="Arun Mehta" class="w-full h-full object-cover">
+                    </div>
+                    <div class="md:w-2/3 p-8">
+                        <div class="flex items-center mb-4">
+                            <h3 class="text-2xl font-bold font-display">Arun Mehta</h3>
+                            <span class="ml-4 px-3 py-1 bg-red-100 text-red-900 rounded-full text-sm">Wood Carving</span>
+                        </div>
+                        <p class="text-gray-500 mb-4">Srinagar, Kashmir | 4th Generation Craftsman</p>
+                        
+                        <div class="craft-timeline mb-6">
+                            <div class="timeline-item">
+                                <h4 class="font-bold mb-1">The Craft</h4>
+                                <p class="text-gray-700">Kashmiri walnut wood carving is unique for its intricate floral patterns and durability. The walnut trees grow slowly in our climate, making the wood precious.</p>
+                            </div>
+                            <div class="timeline-item">
+                                <h4 class="font-bold mb-1">The Technique</h4>
+                                <p class="text-gray-700">Each piece is carved by hand using 32 different chisels. A single decorative box can take 2 weeks to complete, while larger pieces may take months.</p>
+                            </div>
+                            <div class="timeline-item">
+                                <h4 class="font-bold mb-1">The Struggle</h4>
+                                <p class="text-gray-700">Political instability and declining tourism have hurt our sales. We rely on platforms like स्वदेश to reach customers who appreciate true craftsmanship.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-wrap gap-4 mb-6">
+                            <a href="#" class="bg-red-900 hover:bg-red-800 text-white px-6 py-2 rounded-md transition">View Collection</a>
+                            <a href="#" class="border border-red-900 text-red-900 hover:bg-red-50 px-6 py-2 rounded-md transition">See Tools</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Craft Regions -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold font-display mb-4">Explore by Craft Region</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">India's diverse regions each have unique craft traditions passed down through generations</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Rajasthan -->
+                <div class="relative rounded-lg overflow-hidden h-64 group">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSN38cqzU7YUtbyqNQ4Gmmo-TPok5XuyXSnn09JChCfksBfzw3cYYxOV0YUszN0KZ1ge6I&usqp=CAU" alt="Rajasthan" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-6">
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-1">Rajasthan</h3>
+                            <p class="text-gray-200 mb-3">Blue Pottery, Block Printing, Gemstone Jewelry</p>
+                            <a href="#" class="text-white hover:underline flex items-center">
+                                <span>12 Artisans</span>
+                                <i class="fas fa-chevron-right ml-2 text-sm"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Kashmir -->
+                <div class="relative rounded-lg overflow-hidden h-64 group">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTB5Ns5fd50U_QaSzkY654XTLptqA6zXHEA4A&s" alt="Kashmir" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-6">
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-1">Kashmir</h3>
+                            <p class="text-gray-200 mb-3">Pashmina, Walnut Wood, Papier-mâché</p>
+                            <a href="#" class="text-white hover:underline flex items-center">
+                                <span>8 Artisans</span>
+                                <i class="fas fa-chevron-right ml-2 text-sm"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- West Bengal -->
+                <div class="relative rounded-lg overflow-hidden h-64 group">
+                    <img src="https://media.assettype.com/outlooktraveller/2024-01/a369e7e3-f7c8-4210-ae58-1800ea5cb2ea/Kolkata1.jpg?w=1200&h=675&auto=format%2Ccompress&fit=max&enlarge=true" alt="West Bengal" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-6">
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-1">West Bengal</h3>
+                            <p class="text-gray-200 mb-3">Dokra Metal, Terracotta, Kantha Embroidery</p>
+                            <a href="#" class="text-white hover:underline flex items-center">
+                                <span>6 Artisans</span>
+                                <i class="fas fa-chevron-right ml-2 text-sm"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tamil Nadu -->
+                <div class="relative rounded-lg overflow-hidden h-64 group">
+                    <img src="https://www.tamilnadutourism.tn.gov.in/img/history.webp"
+                    class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-6">
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-1">Tamil Nadu</h3>
+                            <p class="text-gray-200 mb-3">Bronze Casting, Kanchipuram Silk, Stone Carving</p>
+                            <a href="#" class="text-white hover:underline flex items-center">
+                                <span>9 Artisans</span>
+                                <i class="fas fa-chevron-right ml-2 text-sm"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support Artisans -->
+    <section class="py-16 bg-red-900 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold font-display mb-6">Support Indian Artisans</h2>
+            <p class="text-xl max-w-3xl mx-auto mb-8">When you purchase from स्वदेश, you're directly supporting artisan communities and helping preserve India's rich craft heritage</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                <div class="bg-white/10 p-6 rounded-lg backdrop-blur-sm">
+                    <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mb-4 mx-auto">
+                        <i class="fas fa-hands-helping text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Fair Wages</h3>
+                    <p class="text-white/90">Artisans earn 3-5x more than local market rates for their work</p>
+                </div>
+                
+                <div class="bg-white/10 p-6 rounded-lg backdrop-blur-sm">
+                    <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mb-4 mx-auto">
+                        <i class="fas fa-home text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Community Impact</h3>
+                    <p class="text-white/90">100% of profits go back to artisan communities for education and healthcare</p>
+                </div>
+                
+                <div class="bg-white/10 p-6 rounded-lg backdrop-blur-sm">
+                    <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mb-4 mx-auto">
+                        <i class="fas fa-book text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Preservation</h3>
+                    <p class="text-white/90">We document and archive traditional techniques for future generations</p>
+                </div>
+            </div>
+            
+            <a href="products.html" class="inline-block bg-white text-red-900 hover:bg-gray-100 px-8 py-4 rounded-md font-medium transition">Shop Artisan Products</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-12 pb-6">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
+                <!-- Column 1 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 font-display">स्वदेश</h3>
+                    <p class="text-gray-400 mb-4">Celebrating India's rich heritage through authentic handcrafted products.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-pinterest"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Column 2 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 font-display">Shop</h3>
+                    <ul class="space-y-2">
+                        <li><a href="products.html" class="text-gray-400 hover:text-white transition">All Products</a></li>
+                        <li><a href="handicrafts.html" class="text-gray-400 hover:text-white transition">Handicrafts</a></li>
+                        <li><a href="textiles.html" class="text-gray-400 hover:text-white transition">Textiles</a></li>
+                        <li><a href="artisans.html" class="text-gray-400 hover:text-white transition">Artisan Collections</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Gift Cards</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 3 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 font-display">Artisans</h3>
+                    <ul class="space-y-2">
+                        <li><a href="artisans.html" class="text-gray-400 hover:text-white transition">Meet the Makers</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Craft Stories</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Workshop Tours</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Become an Artisan</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Support Initiatives</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 4 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 font-display">Help</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">FAQs</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Shipping & Returns</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Track Order</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Contact Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-6">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400 text-sm mb-4 md:mb-0">© 2023 स्वदेश. All rights reserved.</p>
+                    <div class="flex space-x-6">
+                        <img src="https://via.placeholder.com/40x25" alt="Payment Method" class="h-6">
+                        <img src="https://via.placeholder.com/40x25" alt="Payment Method" class="h-6">
+                        <img src="https://via.placeholder.com/40x25" alt="Payment Method" class="h-6">
+                        <img src="https://via.placeholder.com/40x25" alt="Payment Method" class="h-6">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Cart functionality
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        
+        // Update cart count
+        function updateCartCount() {
+            const count = cart.reduce((total, item) => total + item.quantity, 0);
+            document.getElementById('cartCount').textContent = count;
+        }
+        
+        // Mobile search toggle
+        document.getElementById('mobileSearchBtn').addEventListener('click', () => {
+            document.getElementById('mobileSearch').classList.toggle('hidden');
+        });
+        
+        // Initialize
+        updateCartCount();
+    </script>
+</body>
+</html>

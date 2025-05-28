@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>स्वदेश | Authentic Indian Products</title>
+    <meta name="description" content="Celebrating India's heritage with authentic handcrafted products">
+    
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Hindi Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Hind:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #800000; /* Maroon */
+            --primary-dark: #5a0000;
+            --secondary: #d4af37; /* Gold */
+            --accent: #e5d9b6; /* Cream */
+            --dark: #1a1a1a;
+            --light: #ffffff;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9f9f9;
+        }
+        
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .hindi-font {
+            font-family: 'Hind', sans-serif;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #800000 0%, #5a0000 100%);
+        }
+        
+        .deal-gradient {
+            background: linear-gradient(90deg, #800000 0%, #d4af37 100%);
+        }
+        
+        .product-card {
+            transition: all 0.3s ease;
+            background-color: white;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .category-card:hover .category-icon {
+            transform: scale(1.15) rotate(5deg);
+            background-color: var(--accent);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover:after {
+            width: 100%;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            transition: all 0.3s ease;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-secondary {
+            background: var(--secondary);
+            transition: all 0.3s ease;
+            color: var(--dark);
+        }
+        
+        .btn-secondary:hover {
+            background: #c19b0b;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .discount-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--primary);
+            color: white;
+            font-weight: bold;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        
+        .trending-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: var(--secondary);
+            color: var(--dark);
+            font-weight: bold;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        
+        .artisan-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: var(--accent);
+            color: var(--primary);
+            font-weight: bold;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body class="antialiased text-gray-900">
+    <!-- Announcement Bar -->
+    <div class="bg-gray-900 text-white text-sm py-2 px-4 text-center">
+        <p>🇮🇳 Free shipping on orders over ₹999 | Use code <strong>PREE10</strong> for 10% off 🇮🇳</p>
+    </div>
+
+    <!-- Main Navigation -->
+    <!-- Updated Header Section -->
+<header class="sticky top-0 z-50 bg-white shadow-sm">
+    <div class="container mx-auto px-4">
+        <div class="flex items-center justify-between h-16">
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center space-x-2">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-r from-red-900 to-yellow-600 flex items-center justify-center text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-5-9h10v2H7z"/>
+                        <path d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/>
+                    </svg>
+                </div>
+                <span class="text-2xl font-bold font-display text-gray-900 hindi-font">स्वदेश</span>
+            </a>
+            
+            <!-- Desktop Search - Functional -->
+            <div class="hidden lg:flex flex-1 max-w-xl mx-6">
+                <div class="relative w-full">
+                    <input type="text" placeholder="Search for handicrafts, textiles, spices..." 
+                           class="w-full pl-4 pr-12 py-2 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-red-800 focus:border-transparent text-sm">
+                    <button class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-red-900 text-white p-2 rounded-full hover:bg-red-800 transition">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="products.html" class="text-gray-700 hover:text-red-900 transition nav-link">Shop</a>
+                <a href="handicrafts.html" class="text-gray-700 hover:text-red-900 transition nav-link">Handicrafts</a>
+                <a href="textiles.html" class="text-gray-700 hover:text-red-900 transition nav-link">Textiles</a>
+                <a href="artisans.html" class="text-gray-700 hover:text-red-900 transition nav-link">Artisans</a>
+            </nav>
+            
+            <!-- User Actions - Single Profile Icon -->
+            <div class="flex items-center space-x-4">
+                <!-- Mobile Search Button -->
+                <button id="mobileSearchBtn" class="lg:hidden text-gray-700">
+                    <i class="fas fa-search text-xl"></i>
+                </button>
+                
+                <!-- Profile Dropdown - Functional -->
+                <div class="relative group">
+                    <a href="profile.html" class="text-gray-700 hover:text-red-900">
+                        <i id="profileIcon" class="fas fa-user text-xl"></i>
+                    </a>
+                    <div class="absolute right-0 mt-2 w-56 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-10">
+                        <a href="profile.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">My Profile</a>
+                        <a href="orders.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">My Orders</a>
+                        <a href="wishlist.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Wishlist</a>
+                        <div class="border-t border-gray-200 my-1"></div>
+                        <a href="#" id="logoutBtn" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</a>
+                    </div>
+                </div>
+                
+                <!-- Cart Icon -->
+                <a href="cart.html" class="relative text-gray-700 hover:text-red-900">
+                    <i class="fas fa-shopping-cart text-xl"></i>
+                    <span class="absolute -top-2 -right-2 bg-red-900 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">3</span>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Mobile Search (hidden by default) -->
+        <div id="mobileSearch" class="lg:hidden hidden mt-3 mb-2">
+            <div class="relative">
+                <input type="text" placeholder="Search for handicrafts..." 
+                       class="w-full pl-4 pr-12 py-2 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-red-800 focus:border-transparent text-sm">
+                <button class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-red-900 text-white p-2 rounded-full hover:bg-red-800 transition">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<script>
+    // Search functionality
+    document.getElementById('mobileSearchBtn').addEventListener('click', function() {
+        document.getElementById('mobileSearch').classList.toggle('hidden');
+    });
+
+    // Profile session management
+    document.addEventListener('DOMContentLoaded', function() {
+        // Check login status
+        const isLoggedIn = localStorage.getItem('swadesh_session') === 'authenticated';
+        const profileIcon = document.getElementById('profileIcon');
+        
+        if (isLoggedIn && profileIcon) {
+            profileIcon.classList.add('text-red-900');
+            profileIcon.classList.remove('text-gray-700');
+        }
+
+        // Logout functionality
+        document.getElementById('logoutBtn')?.addEventListener('click', function(e) {
+            e.preventDefault();
+            localStorage.removeItem('swadesh_session');
+            window.location.href = 'profile.html';
+        });
+    });
+
+    // Search form submission (for both desktop and mobile)
+    const searchForms = document.querySelectorAll('header form');
+    searchForms.forEach(form => {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const searchQuery = this.querySelector('input[type="text"]').value;
+            // Implement your search functionality here
+            console.log('Searching for:', searchQuery);
+            window.location.href = `products.html?search=${encodeURIComponent(searchQuery)}`;
+        });
+    });
+</script>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient text-white">
+        <div class="container mx-auto px-4 py-16 md:py-24">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold font-display mb-6 leading-tight">
+                        Celebrate India's Artistry
+                    </h1>
+                    <p class="text-xl mb-8 opacity-90 max-w-lg">
+                        Discover authentic handcrafted products from artisans across India.
+                    </p>
+                    <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
+                        <a href="products.html" class="bg-white text-red-900 px-8 py-3 rounded-full font-medium hover:bg-opacity-90 transition text-center btn-primary">
+                            Shop Now
+                        </a>
+                        <a href="artisans.html" class="bg-transparent border-2 border-white text-white px-8 py-3 rounded-full font-medium hover:bg-white hover:text-red-900 transition text-center">
+                            Meet Artisans
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <img src="https://www.indicinspirations.com/cdn/shop/products/celebration-of-life-santhal-painting-a4-frame-paintings-278683.jpg?v=1665659756&width=899" 
+                         alt="Indian handicrafts" 
+                         class="rounded-xl shadow-2xl w-full max-w-md object-cover h-80 md:h-96">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold font-display text-center mb-8">Our Collections</h2>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <!-- Category 1 -->
+                <a href="#" class="category-card bg-gray-50 rounded-xl p-6 text-center hover:shadow-md transition">
+                    <div class="category-icon bg-red-100 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4 transition">
+                        <i class="fas fa-rug text-red-900 text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-lg">Handicrafts</h3>
+                    <p class="text-sm text-gray-500 mt-1">Traditional artistry</p>
+                </a>
+                
+                <!-- Category 2 -->
+                <a href="#" class="category-card bg-gray-50 rounded-xl p-6 text-center hover:shadow-md transition">
+                    <div class="category-icon bg-yellow-100 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4 transition">
+                        <i class="fas fa-tshirt text-yellow-700 text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-lg">Textiles</h3>
+                    <p class="text-sm text-gray-500 mt-1">Handwoven fabrics</p>
+                </a>
+                
+                <!-- Category 3 -->
+                <a href="#" class="category-card bg-gray-50 rounded-xl p-6 text-center hover:shadow-md transition">
+                    <div class="category-icon bg-green-100 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4 transition">
+                        <i class="fas fa-mortar-pestle text-green-700 text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-lg">Spices</h3>
+                    <p class="text-sm text-gray-500 mt-1">Authentic flavors</p>
+                </a>
+                
+                <!-- Category 4 -->
+                <a href="#" class="category-card bg-gray-50 rounded-xl p-6 text-center hover:shadow-md transition">
+                    <div class="category-icon bg-blue-100 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4 transition">
+                        <i class="fas fa-home text-blue-700 text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-lg">Home Decor</h3>
+                    <p class="text-sm text-gray-500 mt-1">Elegant living</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Handpicked Collection -->
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-8">
+                <h2 class="text-3xl font-bold font-display">Handpicked Collection</h2>
+                <a href="collections.html" class="text-red-900 hover:text-red-700 font-medium flex items-center mt-4 md:mt-0">
+                    View all collections <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+            
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
+                <!-- Product 1 - Blue Pottery -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-sm relative">
+                    <span class="artisan-badge">HANDMADE</span>
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1738053473109-0536f918f4c3?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                             alt="Blue Pottery" 
+                             class="w-full h-full object-cover transition duration-500 hover:scale-105">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-sm mb-1">Jaipur Blue Pottery Vase</h3>
+                        <div class="flex items-center">
+                            <span class="text-base font-bold">₹2,499</span>
+                            <span class="text-gray-500 line-through text-xs ml-2">₹3,200</span>
+                            <span class="text-green-600 text-xs font-medium ml-2">22% OFF</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 2 - Banarasi Saree -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-sm relative">
+                    <span class="artisan-badge">HANDWOVEN</span>
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://cdn.pixabay.com/photo/2017/05/12/11/47/buy-sarees-online-in-india-2306851_1280.jpg" 
+                             alt="Banarasi Saree" 
+                             class="w-full h-full object-cover transition duration-500 hover:scale-105">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-sm mb-1">Banarasi Silk Saree</h3>
+                        <div class="flex items-center">
+                            <span class="text-base font-bold">₹5,999</span>
+                            <span class="text-gray-500 line-through text-xs ml-2">₹7,500</span>
+                            <span class="text-green-600 text-xs font-medium ml-2">20% OFF</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 3 - Spice Box -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-sm relative">
+                    <span class="artisan-badge">HANDCRAFTED</span>
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://apisap.fabindia.com/medias/20127104-01.jpg?context=bWFzdGVyfGltYWdlc3wyNDYxMTl8aW1hZ2UvanBlZ3xhR1EyTDJobU5pOHhOVEl5T1RVek1UYzRNekU1T0M4eU1ERXlOekV3TkY4d01TNXFjR2N8ZTU0OGNkNjMwYTMyYjI1NTQ2NzMyN2Q0ODk1MDA2MDZmMjJmMDY0MDI3ODkyM2Q0ZDZmYmY0MTYzYTU0Y2YzMQ" 
+                             alt="Spice Box" 
+                             class="w-full h-full object-cover transition duration-500 hover:scale-105">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-sm mb-1">Brass Spice Box (Masala Dabba)</h3>
+                        <div class="flex items-center">
+                            <span class="text-base font-bold">₹1,799</span>
+                            <span class="text-gray-500 line-through text-xs ml-2">₹2,200</span>
+                            <span class="text-green-600 text-xs font-medium ml-2">18% OFF</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 4 - Pashmina Shawl -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-sm relative">
+                    <span class="artisan-badge">KASHMIRI</span>
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1595595175455-740365521cd3?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                             alt="Pashmina Shawl" 
+                             class="w-full h-full object-cover transition duration-500 hover:scale-105">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-sm mb-1">Kashmiri Pashmina Shawl</h3>
+                        <div class="flex items-center">
+                            <span class="text-base font-bold">₹4,299</span>
+                            <span class="text-gray-500 line-through text-xs ml-2">₹5,999</span>
+                            <span class="text-green-600 text-xs font-medium ml-2">28% OFF</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 5 - Wooden Chess -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-sm relative">
+                    <span class="artisan-badge">HANDCARVED</span>
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1529699211952-734e80c4d42b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80" 
+                             alt="Wooden Chess Set" 
+                             class="w-full h-full object-cover transition duration-500 hover:scale-105">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-sm mb-1">Handcarved Wooden Chess Set</h3>
+                        <div class="flex items-center">
+                            <span class="text-base font-bold">₹3,499</span>
+                            <span class="text-gray-500 line-through text-xs ml-2">₹4,200</span>
+                            <span class="text-green-600 text-xs font-medium ml-2">17% OFF</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Regional Specialties -->
+<section class="py-12 bg-white">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold font-display text-center mb-8">Regional Specialties</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Collection 1 - Rajasthan -->
+            <div class="relative rounded-xl overflow-hidden h-64 group">
+                <img src="https://img.indiahighlight.com/1170x550/ih/uploads/1731733472.jpg" 
+                     alt="Rajasthan Handicrafts" 
+                     class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+                <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
+                    <div class="text-center p-4">
+                        <h3 class="text-2xl font-bold text-white font-display mb-2">Rajasthan</h3>
+                        <p class="text-white mb-4">Blue Pottery & Textiles</p>
+                        <a href="products.html?region=rajasthan" class="inline-block bg-white text-red-900 px-6 py-2 rounded-full font-medium hover:bg-opacity-90 transition">
+                            Explore
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Collection 2 - Kashmir -->
+            <div class="relative rounded-xl overflow-hidden h-64 group">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTB5Ns5fd50U_QaSzkY654XTLptqA6zXHEA4A&s" 
+                     alt="Kashmir Shawls" 
+                     class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+                <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
+                    <div class="text-center p-4">
+                        <h3 class="text-2xl font-bold text-white font-display mb-2">Kashmir</h3>
+                        <p class="text-white mb-4">Pashmina & Papier-mâché</p>
+                        <a href="products.html?region=kashmir" class="inline-block bg-white text-red-900 px-6 py-2 rounded-full font-medium hover:bg-opacity-90 transition">
+                            Explore
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Collection 3 - Kerala -->
+            <div class="relative rounded-xl overflow-hidden h-64 group">
+                <img src="https://imgcdn.flamingotravels.co.in/Images/Country/Kerala%20State.JPG" 
+                     alt="Kerala Spices" 
+                     class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+                <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
+                    <div class="text-center p-4">
+                        <h3 class="text-2xl font-bold text-white font-display mb-2">Kerala</h3>
+                        <p class="text-white mb-4">Spices & Coir Products</p>
+                        <a href="products.html?region=kerala" class="inline-block bg-white text-red-900 px-6 py-2 rounded-full font-medium hover:bg-opacity-90 transition">
+                            Explore
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+
+    <!-- Best Sellers -->
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-8">
+                <h2 class="text-3xl font-bold font-display">Best Sellers</h2>
+                <a href="bestsellers.html" class="text-red-900 hover:text-red-700 font-medium flex items-center mt-4 md:mt-0">
+                    View all bestsellers <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+            
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
+                <!-- Product 6 - Madhubani Painting -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-sm relative">
+                    <span class="discount-badge">25% OFF</span>
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://khirki.in/cdn/shop/files/Artboard2_2122c68e-a1fd-449f-b0a7-a96a641ca25c.jpg?v=1730457936" 
+                             alt="Madhubani Painting" 
+                             class="w-full h-full object-cover transition duration-500 hover:scale-105">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-sm mb-1">Madhubani Painting</h3>
+                        <div class="flex items-center">
+                            <span class="text-base font-bold">₹3,599</span>
+                            <span class="text-gray-500 line-through text-xs ml-2">₹4,799</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 7 - Assam Tea -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-sm relative">
+                    <span class="discount-badge">15% OFF</span>
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1558160074-4d7d8bdf4256?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                             alt="Assam Tea" 
+                             class="w-full h-full object-cover transition duration-500 hover:scale-105">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-sm mb-1">Assam Orthodox Tea (500g)</h3>
+                        <div class="flex items-center">
+                            <span class="text-base font-bold">₹899</span>
+                            <span class="text-gray-500 line-through text-xs ml-2">₹1,059</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 8 - Dhokra Art -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-sm relative">
+                    <span class="discount-badge">30% OFF</span>
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://www.gitagged.com/wp-content/uploads/2019/11/Dhokra-Art-Elephant-Pen-Holder-GiTAGGED-1.jpg" 
+                             alt="Dhokra Art" 
+                             class="w-full h-full object-cover transition duration-500 hover:scale-105">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-sm mb-1">Dhokra Elephant Sculpture</h3>
+                        <div class="flex items-center">
+                            <span class="text-base font-bold">₹2,199</span>
+                            <span class="text-gray-500 line-through text-xs ml-2">₹3,099</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 9 - Kanjeevaram Saree -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-sm relative">
+                    <span class="discount-badge">20% OFF</span>
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://www.fashionvibes.net/cdn/shop/products/kanjivaram-silk-saree-cyan-saree-fashionvibes-13920594100273.jpg?v=1618104111" 
+                             alt="Kanjeevaram Saree" 
+                             class="w-full h-full object-cover transition duration-500 hover:scale-105">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-sm mb-1">Kanjeevaram Silk Saree</h3>
+                        <div class="flex items-center">
+                            <span class="text-base font-bold">₹7,999</span>
+                            <span class="text-gray-500 line-through text-xs ml-2">₹9,999</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 10 - Ayurvedic Kit -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-sm relative">
+                    <span class="discount-badge">10% OFF</span>
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://img.forestessentialsindia.com/pub/media/home/Just-in/Anti-Acne-kit.jpg" 
+                             alt="Ayurvedic Kit" 
+                             class="w-full h-full object-cover transition duration-500 hover:scale-105">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-sm mb-1">Ayurvedic Wellness Kit</h3>
+                        <div class="flex items-center">
+                            <span class="text-base font-bold">₹1,799</span>
+                            <span class="text-gray-500 line-through text-xs ml-2">₹1,999</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Artisan Stories -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold font-display text-center mb-8">Artisan Stories</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Artisan 1 -->
+                <div class="bg-gray-50 rounded-xl overflow-hidden shadow-sm flex flex-col md:flex-row">
+                    <div class="md:w-1/3 h-64 md:h-auto">
+                        <img src="https://static3.bigstockphoto.com/8/5/3/large1500/358349375.jpg" 
+                             alt="Potter from Rajasthan" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    <div class="md:w-2/3 p-6">
+                        <h3 class="font-bold text-xl font-display mb-2">Ramesh Prajapat</h3>
+                        <p class="text-gray-600 mb-4">Blue Pottery Artisan, Jaipur</p>
+                        <p class="text-gray-700 mb-4">"My family has been creating blue pottery for seven generations. Each piece carries our heritage and the unique colors of Rajasthan."</p>
+                        </i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Artisan 2 -->
+                <div class="bg-gray-50 rounded-xl overflow-hidden shadow-sm flex flex-col md:flex-row">
+                    <div class="md:w-1/3 h-64 md:h-auto">
+                        <img src="https://i0.wp.com/varanasivideos.com/wp-content/uploads/2018/12/Weaver-weaving-Banarasi-Saree.jpg?resize=1104%2C621" 
+                             alt="Weaver from Varanasi" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    <div class="md:w-2/3 p-6">
+                        <h3 class="font-bold text-xl font-display mb-2">Fatima Begum</h3>
+                        <p class="text-gray-600 mb-4">Banarasi Saree Weaver, Varanasi</p>
+                        <p class="text-gray-700 mb-4">"Each Banarasi saree takes weeks to create, with intricate zari work that tells stories of our culture. It's not just clothing, it's art."</p>
+                        </i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4 max-w-4xl text-center">
+            <h2 class="text-3xl font-bold font-display mb-4">Join Our Community</h2>
+            <p class="text-gray-600 mb-8 max-w-2xl mx-auto">Subscribe to our newsletter for exclusive offers, artisan stories, and updates on new products.</p>
+            
+            <form class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+                <input type="email" placeholder="Your email address" 
+                       class="flex-1 px-4 py-3 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-red-800 focus:border-transparent">
+                <button type="submit" class="bg-red-900 text-white px-6 py-3 rounded-full font-medium hover:bg-red-800 transition">
+                    Subscribe
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-12 pb-6">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
+                <!-- Column 1 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 font-display">स्वदेश</h3>
+                    <p class="text-gray-400 mb-4">Celebrating India's rich heritage through authentic handcrafted products.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-pinterest"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Column 2 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 font-display">Shop</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">All Products</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">New Arrivals</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Best Sellers</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Regional Specialties</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Gift Cards</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 3 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 font-display">About</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Our Story</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Artisans</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Sustainability</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Press</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 4 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 font-display">Help</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Contact Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">FAQs</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Shipping</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Returns</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-6 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm mb-4 md:mb-0">© 2023 स्वदेश. All rights reserved.</p>
+                <div class="flex space-x-6">
+                    <img src="https://via.placeholder.com/40x25?text=Visa" alt="Visa" class="h-6">
+                    <img src="https://via.placeholder.com/40x25?text=MC" alt="Mastercard" class="h-6">
+                    <img src="https://via.placeholder.com/40x25?text=PP" alt="PayPal" class="h-6">
+                    <img src="https://via.placeholder.com/40x25?text=UPI" alt="UPI" class="h-6">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const session = JSON.parse(localStorage.getItem("session"));
+            const profileIcon = document.getElementById("profileIcon");
+            const logoutBtn = document.getElementById("logoutBtn");
+    
+            // Handle login state
+            if (!session) {
+                console.warn("User not logged in.");
+            } else {
+                // Show session email/role at the top
+                const userBar = document.createElement("div");
+                userBar.className = "bg-yellow-100 text-sm text-gray-900 px-4 py-2 text-center font-medium";
+                userBar.innerText = `Logged in as: ${session.email} (${session.role})`;
+                document.body.insertBefore(userBar, document.body.firstChild);
+    
+                // Highlight profile icon
+                if (profileIcon) {
+                    profileIcon.classList.add('text-red-900');
+                    profileIcon.classList.remove('text-gray-700');
+                }
+    
+                // Show seller product form
+                if (session.role === "seller") {
+                    const sellerSection = document.createElement("section");
+                    sellerSection.className = "py-12 bg-white";
+                    sellerSection.innerHTML = `
+                        <div class="container mx-auto px-4 max-w-2xl">
+                            <h2 class="text-2xl font-bold mb-4">Add Product</h2>
+                            <input id="productName" type="text" placeholder="Product Name" class="border p-2 w-full mb-2">
+                            <input id="productPrice" type="number" placeholder="Price" class="border p-2 w-full mb-2">
+                            <input id="productStock" type="number" placeholder="Stock" class="border p-2 w-full mb-4">
+                            <button onclick="addProduct()" class="bg-red-900 text-white px-6 py-2 rounded hover:bg-red-800">Add Product</button>
+                            <div class="mt-6">
+                                <h3 class="text-xl font-semibold mb-2">Your Products</h3>
+                                <ul id="productList" class="list-disc list-inside space-y-1"></ul>
+                            </div>
+                        </div>
+                    `;
+                    document.body.appendChild(sellerSection);
+                    loadProducts(session.email);
+                }
+            }
+    
+            // Logout
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    localStorage.removeItem("session");
+                    alert("You have been logged out.");
+                    window.location.reload();
+                });
+            }
+    
+            // Mobile menu toggle
+            const menuBtn = document.getElementById('mobileMenuBtn');
+            if (menuBtn) {
+                menuBtn.addEventListener('click', function () {
+                    document.getElementById('mobileMenu')?.classList.toggle('hidden');
+                });
+            }
+    
+            // Mobile search toggle
+            const searchBtn = document.getElementById('mobileSearchBtn');
+            if (searchBtn) {
+                searchBtn.addEventListener('click', function () {
+                    document.getElementById('mobileSearch')?.classList.toggle('hidden');
+                });
+            }
+        });
+    
+        function addProduct() {
+            const session = JSON.parse(localStorage.getItem("session"));
+            const email = session.email;
+    
+            const name = document.getElementById("productName").value;
+            const price = document.getElementById("productPrice").value;
+            const stock = document.getElementById("productStock").value;
+    
+            const allProducts = JSON.parse(localStorage.getItem("products") || "{}");
+            if (!allProducts[email]) allProducts[email] = [];
+    
+            allProducts[email].push({ name, price, stock });
+            localStorage.setItem("products", JSON.stringify(allProducts));
+            loadProducts(email);
+        }
+    
+        function loadProducts(email) {
+            const list = document.getElementById("productList");
+            if (!list) return;
+    
+            const allProducts = JSON.parse(localStorage.getItem("products") || "{}");
+            const products = allProducts[email] || [];
+            list.innerHTML = "";
+    
+            products.forEach(p => {
+                const li = document.createElement("li");
+                li.textContent = `${p.name} - ₹${p.price} (${p.stock} in stock)`;
+                list.appendChild(li);
+            });
+        }
+            // Handle search functionality
+    function handleSearch(query) {
+        if (!query.trim()) return;
+        const encodedQuery = encodeURIComponent(query.trim());
+        window.location.href = `products.html?search=${encodedQuery}`;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        // Desktop search
+        const desktopSearchInput = document.querySelector('input[placeholder^="Search for handicrafts"]');
+        const desktopSearchBtn = document.querySelector('button i.fas.fa-search');
+
+        if (desktopSearchInput && desktopSearchBtn) {
+            desktopSearchBtn.parentElement.addEventListener('click', () => {
+                handleSearch(desktopSearchInput.value);
+            });
+
+            desktopSearchInput.addEventListener('keypress', e => {
+                if (e.key === 'Enter') handleSearch(desktopSearchInput.value);
+            });
+        }
+
+        // Mobile search
+        const mobileSearchInput = document.querySelector('#mobileSearch input[type="text"]');
+        const mobileSearchBtn = document.querySelector('#mobileSearch button');
+
+        if (mobileSearchInput && mobileSearchBtn) {
+            mobileSearchBtn.addEventListener('click', () => {
+                handleSearch(mobileSearchInput.value);
+            });
+
+            mobileSearchInput.addEventListener('keypress', e => {
+                if (e.key === 'Enter') handleSearch(mobileSearchInput.value);
+            });
+        }
+    });
+
+    </script>
+    
+</body>
+</html>

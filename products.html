@@ -1,0 +1,1629 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop | स्वदेश | Authentic Indian Products</title>
+    <meta name="description" content="Explore our collection of authentic Indian handicrafts, textiles, and more">
+    
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Hindi Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Hind:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- SVG Map Library -->
+    <script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+    
+    <style>
+        :root {
+            --primary: #800000; /* Maroon */
+            --primary-dark: #5a0000;
+            --secondary: #d4af37; /* Gold */
+            --accent: #e5d9b6; /* Cream */
+            --dark: #1a1a1a;
+            --light: #ffffff;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9f9f9;
+        }
+        
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .hindi-font {
+            font-family: 'Hind', sans-serif;
+        }
+        
+        .product-card {
+            transition: all 0.3s ease;
+            background-color: white;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .discount-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--primary);
+            color: white;
+            font-weight: bold;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        
+        .trending-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: var(--secondary);
+            color: var(--dark);
+            font-weight: bold;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        
+        .artisan-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: var(--accent);
+            color: var(--primary);
+            font-weight: bold;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        
+        /* Map Styles */
+        #india-map {
+            width: 100%;
+            height: 500px;
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .state {
+            fill: #d1d5db;
+            stroke: #fff;
+            stroke-width: 1;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .state:hover {
+            fill: #9ca3af;
+        }
+        
+        .state.active {
+            fill: var(--primary);
+        }
+        
+        /* Cart Sidebar */
+        .cart-sidebar {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .cart-sidebar.open {
+            transform: translateX(0);
+        }
+        
+        /* Filter Sidebar */
+        .filter-sidebar {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .filter-sidebar.open {
+            transform: translateX(0);
+        }
+        
+        /* Custom checkbox */
+        .custom-checkbox {
+            appearance: none;
+            -webkit-appearance: none;
+            appearance: none;
+            appearance: none;
+            appearance: none;
+            appearance: none;
+            appearance: none;
+            appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border: 2px solid #d1d5db;
+            border-radius: 4px;
+            outline: none;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s;
+        }
+        
+        .custom-checkbox:checked {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .custom-checkbox:checked::after {
+            content: "✓";
+            position: absolute;
+            color: white;
+            font-size: 12px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        /* Price range slider */
+        .range-slider {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: #d1d5db;
+            outline: none;
+        }
+        
+        .range-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="antialiased text-gray-900">
+    <!-- Announcement Bar -->
+    <div class="bg-gray-900 text-white text-sm py-2 px-4 text-center">
+        <p>🇮🇳 Free shipping on orders over ₹999 | Use code <strong>SWADES10</strong> for 10% off 🇮🇳</p>
+    </div>
+
+    <!-- Main Navigation -->
+    <header class="sticky top-0 z-40 bg-white shadow-sm">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center space-x-2">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-r from-red-900 to-yellow-600 flex items-center justify-center text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-5-9h10v2H7z"/>
+                            <path d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/>
+                        </svg>
+                    </div>
+                    <span class="text-2xl font-bold font-display text-gray-900 hindi-font">स्वदेश</span>
+                </a>
+                
+                <!-- Desktop Search -->
+                <div class="hidden lg:flex flex-1 max-w-xl mx-6">
+                    <div class="relative w-full">
+                        <input type="text" placeholder="Search for handicrafts, textiles, spices..." 
+                               class="w-full pl-4 pr-12 py-2 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-red-800 focus:border-transparent text-sm">
+                        <button class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-red-900 text-white p-2 rounded-full hover:bg-red-800 transition">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Navigation Links -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="products.html" class="text-gray-700 hover:text-red-900 transition nav-link">Shop</a>
+                    <a href="handicrafts.html" class="text-gray-700 hover:text-red-900 transition nav-link">Handicrafts</a>
+                    <a href="textiles.html" class="text-gray-700 hover:text-red-900 transition nav-link">Textiles</a>
+                    <a href="artisans.html" class="text-gray-700 hover:text-red-900 transition nav-link">Artisans</a>
+                </nav>
+                
+                <!-- User Actions -->
+                <div class="flex items-center space-x-4">
+                    <!-- Mobile Search Button -->
+                    <button id="mobileSearchBtn" class="lg:hidden text-gray-700">
+                        <i class="fas fa-search text-xl"></i>
+                    </button>
+                    
+                    <!-- Profile Dropdown -->
+                    <div class="relative group">
+                        <a href="profile.html" class="text-gray-700 hover:text-red-900">
+                            <i id="profileIcon" class="fas fa-user text-xl"></i>
+                        </a>
+                        <div class="absolute right-0 mt-2 w-56 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-10">
+                            <a href="profile.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">My Profile</a>
+                            <a href="orders.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">My Orders</a>
+                            <a href="wishlist.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Wishlist</a>
+                            <div class="border-t border-gray-200 my-1"></div>
+                            <a href="#" id="logoutBtn" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Cart Button -->
+                    <button id="cartBtn" class="relative text-gray-700 hover:text-red-900">
+                        <i class="fas fa-shopping-cart text-xl"></i>
+                        <span id="cartCount" class="absolute -top-2 -right-2 bg-red-900 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                    </button>
+                    
+                    <!-- Filter Button (Mobile) -->
+                    <button id="filterBtn" class="lg:hidden text-gray-700">
+                        <i class="fas fa-filter text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Search (hidden by default) -->
+            <div id="mobileSearch" class="lg:hidden hidden mt-3 mb-2">
+                <div class="relative">
+                    <input type="text" placeholder="Search for handicrafts..." 
+                           class="w-full pl-4 pr-12 py-2 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-red-800 focus:border-transparent text-sm">
+                    <button class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-red-900 text-white p-2 rounded-full hover:bg-red-800 transition">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="flex flex-col lg:flex-row gap-8">
+            <!-- Filter Sidebar (Desktop) -->
+            <aside class="hidden lg:block w-64 flex-shrink-0">
+                <div class="bg-white p-6 rounded-lg shadow-sm sticky top-24">
+                    <h3 class="font-bold text-lg mb-4 font-display">Filters</h3>
+                    
+                    <!-- Categories Filter -->
+                    <div class="mb-6">
+                        <h4 class="font-semibold mb-3 flex justify-between items-center">
+                            <span>Categories</span>
+                            <button class="text-sm text-gray-500">Clear</button>
+                        </h4>
+                        <div class="space-y-2">
+                            <label class="flex items-center space-x-2 cursor-pointer">
+                                <input type="checkbox" class="custom-checkbox" data-filter="category" value="handicrafts">
+                                <span>Handicrafts</span>
+                            </label>
+                            <label class="flex items-center space-x-2 cursor-pointer">
+                                <input type="checkbox" class="custom-checkbox" data-filter="category" value="textiles">
+                                <span>Textiles</span>
+                            </label>
+                            <label class="flex items-center space-x-2 cursor-pointer">
+                                <input type="checkbox" class="custom-checkbox" data-filter="category" value="spices">
+                                <span>Spices</span>
+                            </label>
+                            <label class="flex items-center space-x-2 cursor-pointer">
+                                <input type="checkbox" class="custom-checkbox" data-filter="category" value="home-decor">
+                                <span>Home Decor</span>
+                            </label>
+                            <label class="flex items-center space-x-2 cursor-pointer">
+                                <input type="checkbox" class="custom-checkbox" data-filter="category" value="jewelry">
+                                <span>Jewelry</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Price Range Filter -->
+                    <div class="mb-6">
+                        <h4 class="font-semibold mb-3">Price Range</h4>
+                        <div class="mb-2">
+                            <input type="range" min="0" max="20000" value="20000" step="500" class="range-slider" id="priceRange">
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span id="minPrice">₹0</span>
+                            <span id="maxPrice">₹20,000</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Regional Filter -->
+                    <div class="mb-6">
+                        <h4 class="font-semibold mb-3">Regional Specialties</h4>
+                        <div class="space-y-2">
+                            <label class="flex items-center space-x-2 cursor-pointer">
+                                <input type="checkbox" class="custom-checkbox" data-filter="region" value="rajasthan">
+                                <span>Rajasthan</span>
+                            </label>
+                            <label class="flex items-center space-x-2 cursor-pointer">
+                                <input type="checkbox" class="custom-checkbox" data-filter="region" value="kashmir">
+                                <span>Kashmir</span>
+                            </label>
+                            <label class="flex items-center space-x-2 cursor-pointer">
+                                <input type="checkbox" class="custom-checkbox" data-filter="region" value="kerala">
+                                <span>Kerala</span>
+                            </label>
+                            <label class="flex items-center space-x-2 cursor-pointer">
+                                <input type="checkbox" class="custom-checkbox" data-filter="region" value="west-bengal">
+                                <span>West Bengal</span>
+                            </label>
+                            <label class="flex items-center space-x-2 cursor-pointer">
+                                <input type="checkbox" class="custom-checkbox" data-filter="region" value="tamil-nadu">
+                                <span>Tamil Nadu</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Artisan Type Filter -->
+                    <div class="mb-6">
+                        <h4 class="font-semibold mb-3">Artisan Type</h4>
+                        <div class="space-y-2">
+                            <label class="flex items-center space-x-2 cursor-pointer">
+                                <input type="checkbox" class="custom-checkbox" data-filter="artisan" value="handmade">
+                                <span>Handmade</span>
+                            </label>
+                            <label class="flex items-center space-x-2 cursor-pointer">
+                                <input type="checkbox" class="custom-checkbox" data-filter="artisan" value="handwoven">
+                                <span>Handwoven</span>
+                            </label>
+                            <label class="flex items-center space-x-2 cursor-pointer">
+                                <input type="checkbox" class="custom-checkbox" data-filter="artisan" value="organic">
+                                <span>Organic</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <button id="applyFilters" class="w-full bg-red-900 text-white py-2 rounded-md hover:bg-red-800 transition">
+                        Apply Filters
+                    </button>
+                </div>
+            </aside>
+            
+            <!-- Product Grid -->
+            <div class="flex-1">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold font-display">All Products</h2>
+                    <div class="flex items-center space-x-4">
+                        <div class="relative">
+                            <select id="sortBy" class="appearance-none bg-white border border-gray-200 rounded-md pl-3 pr-8 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-red-800">
+                                <option value="popular">Sort by: Popular</option>
+                                <option value="newest">Newest First</option>
+                                <option value="price-low">Price: Low to High</option>
+                                <option value="price-high">Price: High to Low</option>
+                                <option value="discount">Best Discount</option>
+                            </select>
+                            <div class="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                                <i class="fas fa-chevron-down text-xs text-gray-500"></i>
+                            </div>
+                        </div>
+                        <button id="mapToggleBtn" class="hidden md:flex items-center space-x-1 text-red-900">
+                            <i class="fas fa-map"></i>
+                            <span>Explore by Map</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Map View (Hidden by default) -->
+                <div id="mapView" class="hidden mb-8">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="font-bold text-lg">Explore Products by Region</h3>
+                        <button id="closeMapBtn" class="text-gray-500 hover:text-gray-700">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div id="india-map" class="relative">
+                        <!-- Map View (Hidden by default) -->
+                    <div id="mapView" class="hidden mb-8">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="font-bold text-lg">Explore Products by Region</h3>
+                            <button id="closeMapBtn" class="text-gray-500 hover:text-gray-700">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div id="india-map" class="relative">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 800" id="india-svg">
+                                <!-- Rajasthan -->
+                                <path id="rajasthan" class="state" d="M200,300L220,280L240,290L260,280L280,290L300,280L320,290L340,280L360,290L380,280L400,290L420,280L440,290L460,280L480,290L500,280L480,300L460,320L440,340L420,360L400,380L380,400L360,420L340,440L320,460L300,480L280,500L260,480L240,460L220,440L200,420L180,400L160,380L180,360L200,340Z" data-state="rajasthan" data-name="Rajasthan"></path>
+                                
+                                <!-- Kashmir -->
+                                <path id="kashmir" class="state" d="M300,100L320,120L340,140L360,160L380,180L400,200L420,220L440,240L460,260L480,280L460,300L440,280L420,260L400,240L380,220L360,200L340,180L320,160L300,140L280,120Z" data-state="kashmir" data-name="Kashmir"></path>
+                                
+                                <!-- Uttar Pradesh -->
+                                <path id="uttar-pradesh" class="state" d="M400,300L420,320L440,340L460,360L480,380L500,400L520,420L540,440L560,460L580,480L600,500L580,520L560,540L540,560L520,540L500,520L480,500L460,480L440,460L420,440L400,420L380,400L360,380L340,360L360,340L380,320L400,300Z" data-state="uttar-pradesh" data-name="Uttar Pradesh"></path>
+                                
+                                <!-- Kerala -->
+                                <path id="kerala" class="state" d="M500,700L520,680L540,660L560,640L580,620L600,600L620,580L640,560L660,540L640,560L620,580L600,600L580,620L560,640L540,660L520,680L500,700Z" data-state="kerala" data-name="Kerala"></path>
+                                
+                                <!-- Tamil Nadu -->
+                                <path id="tamil-nadu" class="state" d="M600,700L620,680L640,660L660,640L680,620L700,600L680,620L660,640L640,660L620,680L600,700Z" data-state="tamil-nadu" data-name="Tamil Nadu"></path>
+                                
+                                <!-- Karnataka -->
+                                <path id="karnataka" class="state" d="M500,600L520,580L540,560L560,540L580,520L600,500L620,480L640,460L620,480L600,500L580,520L560,540L540,560L520,580L500,600Z" data-state="karnataka" data-name="Karnataka"></path>
+                                
+                                <!-- Maharashtra -->
+                                <path id="maharashtra" class="state" d="M400,500L420,480L440,460L460,440L480,420L500,400L520,380L540,360L560,340L580,320L600,300L620,320L640,340L660,360L640,380L620,400L600,420L580,440L560,460L540,480L520,500L500,520L480,540L460,560L440,580L420,600L400,620Z" data-state="maharashtra" data-name="Maharashtra"></path>
+                                
+                                <!-- Gujarat -->
+                                <path id="gujarat" class="state" d="M200,400L220,380L240,360L260,340L280,320L300,300L320,280L340,260L360,240L380,220L400,200L420,220L440,240L460,260L480,280L500,300L480,320L460,340L440,360L420,380L400,400L380,420L360,440L340,460L320,480L300,500L280,480L260,460L240,440L220,420L200,400Z" data-state="gujarat" data-name="Gujarat"></path>
+                                
+                                <!-- West Bengal -->
+                                <path id="west-bengal" class="state" d="M600,400L620,420L640,440L660,460L680,480L700,500L680,520L660,540L640,560L620,580L600,600L580,580L560,560L540,540L520,520L500,500L520,480L540,460L560,440L580,420L600,400Z" data-state="west-bengal" data-name="West Bengal"></path>
+                                
+                                <!-- Odisha -->
+                                <path id="odisha" class="state" d="M600,500L620,480L640,460L660,440L680,420L700,400L680,420L660,440L640,460L620,480L600,500Z" data-state="odisha" data-name="Odisha"></path>
+                                
+                                <!-- Andhra Pradesh -->
+                                <path id="andhra-pradesh" class="state" d="M600,600L620,580L640,560L660,540L680,520L700,500L680,520L660,540L640,560L620,580L600,600Z" data-state="andhra-pradesh" data-name="Andhra Pradesh"></path>
+                                
+                                <!-- Telangana -->
+                                <path id="telangana" class="state" d="M500,500L520,480L540,460L560,440L580,420L600,400L620,420L640,440L660,460L640,480L620,500L600,520L580,540L560,560L540,580L520,600L500,620Z" data-state="telangana" data-name="Telangana"></path>
+                                
+                                <!-- Bihar -->
+                                <path id="bihar" class="state" d="M500,400L520,380L540,360L560,340L580,320L600,300L620,320L640,340L660,360L640,380L620,400L600,420L580,440L560,460L540,480L520,500L500,520Z" data-state="bihar" data-name="Bihar"></path>
+                                
+                                <!-- Punjab -->
+                                <path id="punjab" class="state" d="M300,200L320,180L340,160L360,140L380,120L400,100L420,120L440,140L460,160L480,180L500,200L480,220L460,240L440,260L420,280L400,300L380,280L360,260L340,240L320,220L300,200Z" data-state="punjab" data-name="Punjab"></path>
+                                
+                                <!-- Haryana -->
+                                <path id="haryana" class="state" d="M400,200L420,180L440,160L460,140L480,120L500,100L520,120L540,140L560,160L540,180L520,200L500,220L480,240L460,260L440,280L420,300L400,320Z" data-state="haryana" data-name="Haryana"></path>
+                                
+                                <!-- Madhya Pradesh -->
+                                <path id="madhya-pradesh" class="state" d="M400,400L420,380L440,360L460,340L480,320L500,300L520,280L540,260L560,240L580,220L600,200L620,220L640,240L660,260L640,280L620,300L600,320L580,340L560,360L540,380L520,400L500,420L480,440L460,460L440,480L420,500L400,520Z" data-state="madhya-pradesh" data-name="Madhya Pradesh"></path>
+                                
+                                <!-- Jharkhand -->
+                                <path id="jharkhand" class="state" d="M600,400L620,380L640,360L660,340L680,320L700,300L680,320L660,340L640,360L620,380L600,400Z" data-state="jharkhand" data-name="Jharkhand"></path>
+                                
+                                <!-- Chhattisgarh -->
+                                <path id="chhattisgarh" class="state" d="M500,500L520,480L540,460L560,440L580,420L600,400L620,420L640,440L660,460L640,480L620,500L600,520L580,540L560,560L540,580L520,600L500,620Z" data-state="chhattisgarh" data-name="Chhattisgarh"></path>
+                                
+                                <!-- Assam -->
+                                <path id="assam" class="state" d="M700,300L720,280L740,260L760,240L780,220L800,200L780,220L760,240L740,260L720,280L700,300Z" data-state="assam" data-name="Assam"></path>
+                                
+                                <!-- Himachal Pradesh -->
+                                <path id="himachal-pradesh" class="state" d="M300,200L320,180L340,160L360,140L380,120L400,100L420,80L440,100L460,120L480,140L500,160L480,180L460,200L440,220L420,240L400,260L380,240L360,220L340,200L320,180L300,160Z" data-state="himachal-pradesh" data-name="Himachal Pradesh"></path>
+                                
+                                <!-- Uttarakhand -->
+                                <path id="uttarakhand" class="state" d="M400,200L420,180L440,160L460,140L480,120L500,100L520,80L540,100L560,120L540,140L520,160L500,180L480,200L460,220L440,240L420,260L400,280Z" data-state="uttarakhand" data-name="Uttarakhand"></path>
+                                
+                                <!-- Goa -->
+                                <path id="goa" class="state" d="M400,600L420,580L440,560L460,540L480,520L500,500L480,520L460,540L440,560L420,580L400,600Z" data-state="goa" data-name="Goa"></path>
+                            </svg>
+                            <div id="map-tooltip" class="absolute bg-white p-3 rounded shadow-lg hidden z-10 pointer-events-none">
+                                <h4 class="font-bold" id="tooltip-state">Rajasthan</h4>
+                                <p class="text-sm" id="tooltip-products">12 products available</p>
+                            </div>
+                        </div>
+                    </div>
+                        <div id="map-tooltip" class="absolute bg-white p-3 rounded shadow-lg hidden z-10 pointer-events-none">
+                            <h4 class="font-bold" id="tooltip-state">Rajasthan</h4>
+                            <p class="text-sm" id="tooltip-products">12 products available</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product Grid View -->
+                <div id="gridView">
+                    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6" id="productGrid">
+                        <!-- Products will be dynamically inserted here -->
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <div class="flex justify-center mt-12">
+                        <nav class="flex items-center space-x-2">
+                            <button class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-red-900 hover:text-white transition">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button class="w-8 h-8 flex items-center justify-center rounded-full bg-red-900 text-white">1</button>
+                            <button class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-red-900 hover:text-white transition">2</button>
+                            <button class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-red-900 hover:text-white transition">3</button>
+                            <span class="px-2">...</span>
+                            <button class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-red-900 hover:text-white transition">8</button>
+                            <button class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-red-900 hover:text-white transition">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Mobile Filter Sidebar (Hidden by default) -->
+    <aside id="mobileFilterSidebar" class="filter-sidebar fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg overflow-y-auto">
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="font-bold text-lg font-display">Filters</h3>
+                <button id="closeFilterBtn" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <!-- Categories Filter -->
+            <div class="mb-6">
+                <h4 class="font-semibold mb-3 flex justify-between items-center">
+                    <span>Categories</span>
+                    <button class="text-sm text-gray-500">Clear</button>
+                </h4>
+                <div class="space-y-2">
+                    <label class="flex items-center space-x-2 cursor-pointer">
+                        <input type="checkbox" class="custom-checkbox" data-filter="category" value="handicrafts">
+                        <span>Handicrafts</span>
+                    </label>
+                    <label class="flex items-center space-x-2 cursor-pointer">
+                        <input type="checkbox" class="custom-checkbox" data-filter="category" value="textiles">
+                        <span>Textiles</span>
+                    </label>
+                    <label class="flex items-center space-x-2 cursor-pointer">
+                        <input type="checkbox" class="custom-checkbox" data-filter="category" value="spices">
+                        <span>Spices</span>
+                    </label>
+                    <label class="flex items-center space-x-2 cursor-pointer">
+                        <input type="checkbox" class="custom-checkbox" data-filter="category" value="home-decor">
+                        <span>Home Decor</span>
+                    </label>
+                    <label class="flex items-center space-x-2 cursor-pointer">
+                        <input type="checkbox" class="custom-checkbox" data-filter="category" value="jewelry">
+                        <span>Jewelry</span>
+                    </label>
+                </div>
+            </div>
+            
+            <!-- Price Range Filter -->
+            <div class="mb-6">
+                <h4 class="font-semibold mb-3">Price Range</h4>
+                <div class="mb-2">
+                    <input type="range" min="0" max="20000" value="20000" step="500" class="range-slider" id="mobilePriceRange">
+                </div>
+                <div class="flex justify-between text-sm">
+                    <span id="mobileMinPrice">₹0</span>
+                    <span id="mobileMaxPrice">₹20,000</span>
+                </div>
+            </div>
+            
+            <!-- Regional Filter -->
+            <div class="mb-6">
+                <h4 class="font-semibold mb-3">Regional Specialties</h4>
+                <div class="space-y-2">
+                    <label class="flex items-center space-x-2 cursor-pointer">
+                        <input type="checkbox" class="custom-checkbox" data-filter="region" value="rajasthan">
+                        <span>Rajasthan</span>
+                    </label>
+                    <label class="flex items-center space-x-2 cursor-pointer">
+                        <input type="checkbox" class="custom-checkbox" data-filter="region" value="kashmir">
+                        <span>Kashmir</span>
+                    </label>
+                    <label class="flex items-center space-x-2 cursor-pointer">
+                        <input type="checkbox" class="custom-checkbox" data-filter="region" value="kerala">
+                        <span>Kerala</span>
+                    </label>
+                    <label class="flex items-center space-x-2 cursor-pointer">
+                        <input type="checkbox" class="custom-checkbox" data-filter="region" value="west-bengal">
+                        <span>West Bengal</span>
+                    </label>
+                    <label class="flex items-center space-x-2 cursor-pointer">
+                        <input type="checkbox" class="custom-checkbox" data-filter="region" value="tamil-nadu">
+                        <span>Tamil Nadu</span>
+                    </label>
+                </div>
+            </div>
+            
+            <!-- Artisan Type Filter -->
+            <div class="mb-6">
+                <h4 class="font-semibold mb-3">Artisan Type</h4>
+                <div class="space-y-2">
+                    <label class="flex items-center space-x-2 cursor-pointer">
+                        <input type="checkbox" class="custom-checkbox" data-filter="artisan" value="handmade">
+                        <span>Handmade</span>
+                    </label>
+                    <label class="flex items-center space-x-2 cursor-pointer">
+                        <input type="checkbox" class="custom-checkbox" data-filter="artisan" value="handwoven">
+                        <span>Handwoven</span>
+                    </label>
+                    <label class="flex items-center space-x-2 cursor-pointer">
+                        <input type="checkbox" class="custom-checkbox" data-filter="artisan" value="organic">
+                        <span>Organic</span>
+                    </label>
+                </div>
+            </div>
+            
+            <button id="applyMobileFilters" class="w-full bg-red-900 text-white py-2 rounded-md hover:bg-red-800 transition">
+                Apply Filters
+            </button>
+        </div>
+    </aside>
+
+    <!-- Cart Sidebar (Hidden by default) -->
+    <aside id="cartSidebar" class="cart-sidebar fixed inset-y-0 right-0 z-50 w-full sm:w-96 bg-white shadow-lg overflow-y-auto">
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="font-bold text-lg font-display">Your Cart (<span id="cartItemCount">0</span>)</h3>
+                <button id="closeCartBtn" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div id="cartItems" class="space-y-4">
+                <!-- Cart items will be dynamically inserted here -->
+                <div class="text-center py-8 text-gray-500" id="emptyCartMessage">
+                    <i class="fas fa-shopping-cart text-4xl mb-4"></i>
+                    <p>Your cart is empty</p>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-200 mt-6 pt-4">
+                <div class="flex justify-between mb-2">
+                    <span>Subtotal</span>
+                    <span id="cartSubtotal">₹0</span>
+                </div>
+                <div class="flex justify-between mb-2">
+                    <span>Shipping</span>
+                    <span id="cartShipping">Calculated at checkout</span>
+                </div>
+                <div class="flex justify-between font-bold text-lg mt-4">
+                    <span>Total</span>
+                    <span id="cartTotal">₹0</span>
+                </div>
+                
+                <div class="mt-6 space-y-3">
+                    <a href="checkout.html" id="checkoutBtn" class="block bg-red-900 text-white text-center py-3 rounded-md hover:bg-red-800 transition disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                        Proceed to Checkout
+                    </a>
+                    <a href="shop.html" class="block border border-gray-300 text-center py-3 rounded-md hover:bg-gray-50 transition">
+                        Continue Shopping
+                    </a>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Overlay (Hidden by default) -->
+    <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden"></div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-12 pb-6 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
+                <!-- Column 1 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 font-display">स्वदेश</h3>
+                    <p class="text-gray-400 mb-4">Celebrating India's rich heritage through authentic handcrafted products.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-pinterest"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Column 2 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 font-display">Shop</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">All Products</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">New Arrivals</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Best Sellers</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Regional Specialties</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Gift Cards</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 3 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 font-display">About</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Our Story</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Artisans</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Sustainability</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Press</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 4 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 font-display">Help</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">FAQs</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Shipping & Returns</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Track Order</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Contact Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                </div>
+
+                <div class="border-t border-gray-800 pt-6">
+                    <div class="flex flex-col md:flex-row justify-between items-center">
+                        <p class="text-gray-400 text-sm mb-4 md:mb-0">© 2023 स्वदेश. All rights reserved.</p>
+                        <div class="flex space-x-6">
+                            <img src="https://via.placeholder.com/40x25" alt="Payment Method" class="h-6">
+                            <img src="https://via.placeholder.com/40x25" alt="Payment Method" class="h-6">
+                            <img src="https://via.placeholder.com/40x25" alt="Payment Method" class="h-6">
+                            <img src="https://via.placeholder.com/40x25" alt="Payment Method" class="h-6">
+                        </div>
+                    </div>
+                </div>
+                </div>
+                </footer>
+
+                <!-- Product Quick View Modal (Hidden by default) -->
+                <div id="quickViewModal" class="fixed inset-0 z-50 hidden overflow-y-auto">
+                    <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                        <div id="quickViewOverlay" class="fixed inset-0 transition-opacity">
+                            <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+                        </div>
+        <span class="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
+        <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-4xl sm:w-full">
+            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <button id="closeQuickView" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="sm:flex sm:items-start">
+                    <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
+                        <div class="flex flex-col md:flex-row gap-6">
+                            <!-- Product Images -->
+                            <div class="w-full md:w-1/2">
+                                <div class="relative">
+                                    <img id="quickViewImage" src="https://via.placeholder.com/500" alt="Product" class="w-full rounded-lg">
+                                    <div id="quickViewBadge" class="absolute top-2 left-2">
+                                        <!-- Badge will be inserted here -->
+                                    </div>
+                                </div>
+                                <div class="flex mt-4 space-x-2">
+                                    <button class="thumbnail-btn border-2 border-transparent hover:border-red-900 rounded" data-image="https://via.placeholder.com/500">
+                                        <img src="https://via.placeholder.com/100" alt="Thumbnail" class="w-16 h-16 object-cover rounded">
+                                    </button>
+                                    <button class="thumbnail-btn border-2 border-transparent hover:border-red-900 rounded" data-image="https://via.placeholder.com/500?text=Alt+1">
+                                        <img src="https://via.placeholder.com/100?text=Alt+1" alt="Thumbnail" class="w-16 h-16 object-cover rounded">
+                                    </button>
+                                    <button class="thumbnail-btn border-2 border-transparent hover:border-red-900 rounded" data-image="https://via.placeholder.com/500?text=Alt+2">
+                                        <img src="https://via.placeholder.com/100?text=Alt+2" alt="Thumbnail" class="w-16 h-16 object-cover rounded">
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Product Details -->
+                            <div class="w-full md:w-1/2">
+                                <h3 id="quickViewTitle" class="text-2xl font-bold font-display mb-2">Product Name</h3>
+                                <div class="flex items-center mb-4">
+                                    <div class="flex text-yellow-400 mr-2">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                    <span class="text-gray-500 text-sm">(42 reviews)</span>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <span id="quickViewPrice" class="text-2xl font-bold text-red-900">₹1,299</span>
+                                    <span id="quickViewOriginalPrice" class="text-gray-500 line-through ml-2">₹1,799</span>
+                                    <span id="quickViewDiscount" class="text-green-600 ml-2">(28% off)</span>
+                                </div>
+                                
+                                <p id="quickViewDescription" class="text-gray-700 mb-4">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                </p>
+                                
+                                <div class="mb-4">
+                                    <h4 class="font-semibold mb-2">Origin:</h4>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-map-marker-alt text-red-900 mr-2"></i>
+                                        <span id="quickViewOrigin">Rajasthan, India</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <h4 class="font-semibold mb-2">Artisan:</h4>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-user text-red-900 mr-2"></i>
+                                        <span id="quickViewArtisan">Rajesh Kumar</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-6">
+                                    <h4 class="font-semibold mb-2">Quantity:</h4>
+                                    <div class="flex items-center">
+                                        <button class="quantity-btn bg-gray-200 px-3 py-1 rounded-l" data-action="decrease">-</button>
+                                        <input type="number" id="quickViewQuantity" value="1" min="1" max="10" class="w-12 text-center border-t border-b border-gray-200 py-1">
+                                        <button class="quantity-btn bg-gray-200 px-3 py-1 rounded-r" data-action="increase">+</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex flex-col sm:flex-row gap-3">
+                                    <button id="addToCartBtn" class="bg-red-900 text-white py-3 px-6 rounded-md hover:bg-red-800 transition flex-1">
+                                        Add to Cart
+                                    </button>
+                                    <button id="buyNowBtn" class="border border-red-900 text-red-900 py-3 px-6 rounded-md hover:bg-red-50 transition flex-1">
+                                        Buy Now
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript -->
+<script>
+    // Sample product data
+    const products = [
+  {
+    id: 1,
+    title: "Blue Pottery Vase",
+    description: "Handcrafted blue pottery from Jaipur, featuring intricate floral patterns.",
+    price: 2499,
+    originalPrice: 3499,
+    image: "https://images.unsplash.com/photo-1738053473109-0536f918f4c3?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    region: "rajasthan",
+    artisan: "handmade",
+    trending: true,
+    origin: "Jaipur, Rajasthan"
+  },
+  {
+    id: 2,
+    title: "Pashmina Shawl",
+    description: "Luxurious 100% pure pashmina shawl handwoven in Kashmir.",
+    price: 5999,
+    originalPrice: 7999,
+    image: "https://images.unsplash.com/photo-1595595175455-740365521cd3?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    category: "textiles",
+    region: "kashmir",
+    artisan: "handwoven",
+    discount: true,
+    origin: "Srinagar, Kashmir"
+  },
+  {
+    id: 3,
+    title: "Sandalwood Elephant",
+    description: "Exquisitely carved sandalwood elephant figurine from Mysore.",
+    price: 1299,
+    originalPrice: 1799,
+    image: "https://images.unsplash.com/photo-1739281468485-dfb4231a004d?q=80&w=2942&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    category: "handicrafts",
+    region: "karnataka",
+    artisan: "handmade",
+    origin: "Mysore, Karnataka"
+  },
+  {
+    id: 4,
+    title: "Banarasi Silk Saree",
+    description: "Authentic Banarasi silk saree with zari work, made in Varanasi.",
+    price: 8999,
+    originalPrice: 12999,
+    image: "https://cdn.pixabay.com/photo/2017/05/12/11/47/buy-sarees-online-in-india-2306851_1280.jpg",
+    category: "textiles",
+    region: "uttar-pradesh",
+    artisan: "handwoven",
+    discount: true,
+    origin: "Varanasi, Uttar Pradesh"
+  },
+  {
+    id: 5,
+    title: "Brass Diya Set",
+    description: "Set of 7 brass diyas with intricate engravings, made in Moradabad.",
+    price: 899,
+    originalPrice: 1299,
+    image: "https://cdn.shopify.com/s/files/1/2679/2640/products/DSC09381copy_360x360_crop_center.jpg?v=1705576452",
+    category: "home-decor",
+    region: "uttar-pradesh",
+    artisan: "handmade",
+    origin: "Moradabad, Uttar Pradesh"
+  },
+  {
+    id: 6,
+    title: "Kerala Spices Box",
+    description: "Assorted organic spices from Kerala - cardamom, pepper, cloves, cinnamon.",
+    price: 699,
+    originalPrice: 999,
+    image: "https://www.cultureshoppe.com/cdn/shop/files/spice_box_1200x1200.jpg?v=1728448507",
+    category: "spices",
+    region: "kerala",
+    artisan: "organic",
+    discount: true,
+    origin: "Kochi, Kerala"
+  },
+  {
+    id: 7,
+    title: "Madhubani Painting",
+    description: "Traditional Madhubani painting on handmade paper, depicting Radha-Krishna.",
+    price: 2499,
+    originalPrice: 2999,
+    image: "https://khirki.in/cdn/shop/files/Artboard2_2122c68e-a1fd-449f-b0a7-a96a641ca25c.jpg?v=1730457936",
+    category: "handicrafts",
+    region: "bihar",
+    artisan: "handmade",
+    trending: true,
+    origin: "Madhubani, Bihar"
+  },
+  {
+    id: 8,
+    title: "Kanjivaram Silk Saree",
+    description: "Authentic Kanjivaram silk saree with temple border, made in Tamil Nadu.",
+    price: 12999,
+    originalPrice: 15999,
+    image: "https://www.fashionvibes.net/cdn/shop/products/kanjivaram-silk-saree-cyan-saree-fashionvibes-13920594100273.jpg?v=1618104111",
+    category: "textiles",
+    region: "tamil-nadu",
+    artisan: "handwoven",
+    origin: "Kanchipuram, Tamil Nadu"
+  },
+  {
+    id: 9,
+    title: "Assam Tea Gift Set",
+    description: "Premium Assam tea leaves with bamboo storage box, 100% organic.",
+    price: 799,
+    originalPrice: 999,
+    image: "https://cdn.shopify.com/s/files/1/0596/3789/1225/files/nov-3-blog_600x600.png?v=1701855335",
+    category: "spices",
+    region: "assam",
+    artisan: "organic",
+    origin: "Dibrugarh, Assam"
+  },
+  {
+    id: 10,
+    title: "Silver Tribal Jewelry Set",
+    description: "Handcrafted tribal jewelry set from Odisha - necklace, earrings and bangles.",
+    price: 3599,
+    originalPrice: 4999,
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWy0v40SWjCSQhAwxD2nfLT11iIsLhHsKkEw&s",
+    category: "jewelry",
+    region: "odisha",
+    artisan: "handmade",
+    discount: true,
+    trending: true,
+    origin: "Bhubaneswar, Odisha"
+  },
+  {
+    id: 11,
+    title: "Dhokra Elephant Sculpture",
+    description: "Traditional Dhokra metal craft elephant sculpture from Chhattisgarh.",
+    price: 1899,
+    originalPrice: 2499,
+    image: "https://5.imimg.com/data5/SELLER/Default/2023/7/328761183/QW/SO/PA/84940581/brass-elephant-dhokra-art.jpg",
+    category: "handicrafts",
+    region: "chhattisgarh",
+    artisan: "handmade",
+    origin: "Bastar, Chhattisgarh"
+  },
+  {
+    id: 12,
+    title: "Kullu Woolen Shawl",
+    description: "Warm woolen shawl with traditional Kullu patterns, handwoven in Himachal.",
+    price: 2499,
+    originalPrice: 2999,
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRca24ezof-hN6VfB6iE4vyQJdbN_OnUdCjGQ&s",
+    category: "textiles",
+    region: "himachal-pradesh",
+    artisan: "handwoven",
+    origin: "Kullu, Himachal Pradesh"
+  },
+  {
+    id: 13,
+    title: "Goan Cashew Nuts",
+    description: "Premium roasted cashew nuts with traditional Goan spices, 500g pack.",
+    price: 599,
+    originalPrice: 799,
+    image: "https://www.goingnuts.in/wp-content/uploads/2023/03/361A0954-scaled-1.jpg",
+    category: "spices",
+    region: "goa",
+    artisan: "organic",
+    origin: "Panaji, Goa"
+  },
+  {
+    id: 14,
+    title: "Bamboo Cane Basket",
+    description: "Handwoven bamboo basket from Assam, perfect for storage or decor.",
+    price: 899,
+    originalPrice: 1199,
+    image: "https://m.media-amazon.com/images/I/71Ye8XvZXoL.jpg",
+    category: "home-decor",
+    region: "assam",
+    artisan: "handmade",
+    origin: "Guwahati, Assam"
+  },
+  {
+    id: 15,
+    title: "Pattachitra Painting",
+    description: "Traditional Pattachitra painting on cloth, depicting Lord Jagannath.",
+    price: 2999,
+    originalPrice: 3499,
+    image: "https://www.theatrang.com/cdn/shop/articles/Pattachitra_1.png?v=1681457153",
+    category: "handicrafts",
+    region: "odisha",
+    artisan: "handmade",
+    trending: true,
+    origin: "Puri, Odisha"
+  },
+  {
+    id: 16,
+    title: "Kashmiri Walnut Wood Bowl",
+    description: "Hand-carved walnut wood bowl with intricate designs from Kashmir.",
+    price: 1599,
+    originalPrice: 1999,
+    image: "https://shop.gaatha.com/image/catalog/Khalil-Mohad.-Kalval/06_06_2024/Grapes-Wood-Carving-Walnut-wood-box.jpg",
+    category: "home-decor",
+    region: "kashmir",
+    artisan: "handmade",
+    origin: "Srinagar, Kashmir"
+  }
+];
+
+
+
+ 
+
+
+
+
+    // State-wise product counts
+    const stateProducts = {
+        "rajasthan": 8,
+        "kashmir": 5,
+        "karnataka": 3,
+        "uttar-pradesh": 7,
+        "kerala": 4,
+        "bihar": 2,
+        "tamil-nadu": 6,
+        "assam": 5,
+        "odisha": 4,
+        "chhattisgarh": 3,
+        "himachal-pradesh": 3,
+        "goa": 2,
+        "west-bengal": 4,
+        "gujarat": 5,
+        "maharashtra": 6,
+        "andhra-pradesh": 4,
+        "telangana": 3,
+        "punjab": 2,
+        "haryana": 3,
+        "jharkhand": 2,
+        "madhya-pradesh": 4,
+        "uttarakhand": 3
+    };
+
+    // Cart functionality
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    
+    // Update cart count
+    function updateCartCount() {
+        const count = cart.reduce((total, item) => total + item.quantity, 0);
+        document.getElementById('cartCount').textContent = count;
+        document.getElementById('cartItemCount').textContent = count;
+    }
+    
+    // Update cart sidebar
+    function updateCartSidebar() {
+        const cartItemsEl = document.getElementById('cartItems');
+        const emptyCartEl = document.getElementById('emptyCartMessage');
+        const checkoutBtn = document.getElementById('checkoutBtn');
+        
+        if (cart.length === 0) {
+            cartItemsEl.innerHTML = '';
+            cartItemsEl.appendChild(emptyCartEl);
+            emptyCartEl.classList.remove('hidden');
+            checkoutBtn.disabled = true;
+            document.getElementById('cartSubtotal').textContent = '₹0';
+            document.getElementById('cartTotal').textContent = '₹0';
+            return;
+        }
+        
+        emptyCartEl.classList.add('hidden');
+        checkoutBtn.disabled = false;
+        
+        let subtotal = 0;
+        cartItemsEl.innerHTML = '';
+        
+        cart.forEach(item => {
+            const product = products.find(p => p.id === item.id);
+            if (!product) return;
+            
+            subtotal += product.price * item.quantity;
+            
+            const itemEl = document.createElement('div');
+            itemEl.className = 'flex gap-4 border-b border-gray-200 pb-4';
+            itemEl.innerHTML = `
+                <div class="w-20 h-20 bg-gray-100 rounded overflow-hidden flex-shrink-0">
+                    <img src="${product.image}" alt="${product.title}" class="w-full h-full object-cover">
+                </div>
+                <div class="flex-1">
+                    <h4 class="font-medium">${product.title}</h4>
+                    <p class="text-sm text-gray-500 mb-1">${product.origin}</p>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center">
+                            <button class="cart-qty-btn" data-id="${product.id}" data-action="decrease">-</button>
+                            <span class="mx-2">${item.quantity}</span>
+                            <button class="cart-qty-btn" data-id="${product.id}" data-action="increase">+</button>
+                        </div>
+                        <span class="font-medium">₹${(product.price * item.quantity).toLocaleString('en-IN')}</span>
+                    </div>
+                </div>
+                <button class="cart-remove-btn text-gray-400 hover:text-red-900" data-id="${product.id}">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            cartItemsEl.appendChild(itemEl);
+        });
+        
+        document.getElementById('cartSubtotal').textContent = `₹${subtotal.toLocaleString('en-IN')}`;
+        document.getElementById('cartTotal').textContent = `₹${subtotal.toLocaleString('en-IN')}`;
+    }
+    
+    // Add to cart
+    function addToCart(productId, quantity = 1) {
+        const existingItem = cart.find(item => item.id === productId);
+        
+        if (existingItem) {
+            existingItem.quantity += quantity;
+        } else {
+            cart.push({ id: productId, quantity });
+        }
+        
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartCount();
+        updateCartSidebar();
+        
+        // Show notification
+        const product = products.find(p => p.id === productId);
+        if (product) {
+            showNotification(`${product.title} added to cart`);
+        }
+    }
+    
+    // Remove from cart
+    function removeFromCart(productId) {
+        cart = cart.filter(item => item.id !== productId);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartCount();
+        updateCartSidebar();
+    }
+    
+    // Update cart item quantity
+    function updateCartItem(productId, newQuantity) {
+        const item = cart.find(item => item.id === productId);
+        if (item) {
+            item.quantity = newQuantity;
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartSidebar();
+        }
+    }
+    
+    // Show notification
+    function showNotification(message) {
+        const notification = document.createElement('div');
+        notification.className = 'fixed bottom-4 right-4 bg-green-600 text-white px-4 py-2 rounded-md shadow-lg flex items-center';
+        notification.innerHTML = `
+            <i class="fas fa-check-circle mr-2"></i>
+            <span>${message}</span>
+        `;
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.classList.add('opacity-0', 'transition-opacity', 'duration-300');
+            setTimeout(() => notification.remove(), 300);
+        }, 3000);
+    }
+    
+    // Render products
+    function renderProducts(productsToRender) {
+        const productGrid = document.getElementById('productGrid');
+        productGrid.innerHTML = '';
+        
+        productsToRender.forEach(product => {
+            const discount = Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100);
+            
+            const productEl = document.createElement('div');
+            productEl.className = 'product-card rounded-lg overflow-hidden shadow-sm relative';
+            productEl.innerHTML = `
+                <div class="relative">
+                    <img src="${product.image}" alt="${product.title}" class="w-full h-48 object-cover">
+                    ${product.discount ? `<div class="discount-badge">${discount}% OFF</div>` : ''}
+                    ${product.trending ? `<div class="trending-badge">Trending</div>` : ''}
+                    ${product.artisan === 'handmade' ? `<div class="artisan-badge">Handmade</div>` : ''}
+                    <button class="quick-view-btn absolute inset-0 w-full h-full bg-black bg-opacity-0 hover:bg-opacity-10 transition flex items-center justify-center opacity-0 hover:opacity-100" data-id="${product.id}">
+                        <span class="bg-white px-3 py-1 rounded-full text-sm font-medium">Quick View</span>
+                    </button>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-medium mb-1 truncate">${product.title}</h3>
+                    <p class="text-sm text-gray-500 mb-2">${product.origin}</p>
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <span class="font-bold text-red-900">₹${product.price.toLocaleString('en-IN')}</span>
+                            ${product.originalPrice ? `<span class="text-xs text-gray-500 line-through ml-1">₹${product.originalPrice.toLocaleString('en-IN')}</span>` : ''}
+                        </div>
+                        <button class="add-to-cart-btn text-red-900 hover:text-red-700" data-id="${product.id}">
+                            <i class="fas fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+            productGrid.appendChild(productEl);
+        });
+    }
+    
+    // Show quick view modal
+    function showQuickView(productId) {
+        const product = products.find(p => p.id === productId);
+        if (!product) return;
+        
+        const discount = Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100);
+        
+        document.getElementById('quickViewTitle').textContent = product.title;
+        document.getElementById('quickViewDescription').textContent = product.description;
+        document.getElementById('quickViewPrice').textContent = `₹${product.price.toLocaleString('en-IN')}`;
+        document.getElementById('quickViewOriginalPrice').textContent = `₹${product.originalPrice.toLocaleString('en-IN')}`;
+        document.getElementById('quickViewDiscount').textContent = `(${discount}% off)`;
+        document.getElementById('quickViewImage').src = product.image;
+        document.getElementById('quickViewOrigin').textContent = product.origin;
+        document.getElementById('quickViewArtisan').textContent = product.artisan === 'handmade' ? 'Handmade by local artisans' : 
+                                                              product.artisan === 'handwoven' ? 'Handwoven by skilled weavers' : 
+                                                              'Organically produced';
+        
+        // Set badge
+        const badgeEl = document.getElementById('quickViewBadge');
+        badgeEl.innerHTML = '';
+        
+        if (product.discount) {
+            const discountBadge = document.createElement('div');
+            discountBadge.className = 'discount-badge';
+            discountBadge.textContent = `${discount}% OFF`;
+            badgeEl.appendChild(discountBadge);
+        } else if (product.trending) {
+            const trendingBadge = document.createElement('div');
+            trendingBadge.className = 'trending-badge';
+            trendingBadge.textContent = 'Trending';
+            badgeEl.appendChild(trendingBadge);
+        } else if (product.artisan === 'handmade') {
+            const artisanBadge = document.createElement('div');
+            artisanBadge.className = 'artisan-badge';
+            artisanBadge.textContent = 'Handmade';
+            badgeEl.appendChild(artisanBadge);
+        }
+        
+        // Set quantity to 1
+        document.getElementById('quickViewQuantity').value = 1;
+        
+        // Show modal
+        document.getElementById('quickViewModal').classList.remove('hidden');
+        document.body.classList.add('overflow-hidden');
+    }
+    
+    // Initialize SVG India map
+    function initIndiaMap() {
+        const mapContainer = document.getElementById('india-map');
+        
+        // In a real implementation, you would load an SVG map of India here
+        // For this example, we'll create a placeholder
+        mapContainer.innerHTML = `
+            <div class="w-full h-full flex items-center justify-center">
+                <div class="text-center p-8">
+                    <i class="fas fa-map text-5xl text-gray-300 mb-4"></i>
+                    <p class="text-gray-500">Interactive India map showing product origins</p>
+                    <p class="text-sm text-gray-400 mt-2">Click on states to filter products</p>
+                </div>
+            </div>
+        `;
+        
+        // In a real implementation, you would add event listeners to each state
+        // to filter products by region when clicked
+    }
+    
+    // Filter products
+    function filterProducts() {
+        const categoryFilters = Array.from(document.querySelectorAll('input[data-filter="category"]:checked')).map(el => el.value);
+        const regionFilters = Array.from(document.querySelectorAll('input[data-filter="region"]:checked')).map(el => el.value);
+        const artisanFilters = Array.from(document.querySelectorAll('input[data-filter="artisan"]:checked')).map(el => el.value);
+        const maxPrice = parseInt(document.getElementById('priceRange').value);
+        
+        let filteredProducts = [...products];
+        
+        // Apply category filter
+        if (categoryFilters.length > 0) {
+            filteredProducts = filteredProducts.filter(product => 
+                categoryFilters.includes(product.category)
+            );
+        }
+        
+        // Apply region filter
+        if (regionFilters.length > 0) {
+            filteredProducts = filteredProducts.filter(product => 
+                regionFilters.includes(product.region)
+            );
+        }
+        
+        // Apply artisan filter
+        if (artisanFilters.length > 0) {
+            filteredProducts = filteredProducts.filter(product => 
+                artisanFilters.includes(product.artisan)
+            );
+        }
+        
+        // Apply price filter
+        filteredProducts = filteredProducts.filter(product => 
+            product.price <= maxPrice
+        );
+        
+        // Apply sorting
+        const sortBy = document.getElementById('sortBy').value;
+        switch (sortBy) {
+            case 'newest':
+                filteredProducts.sort((a, b) => b.id - a.id); // Assuming higher IDs are newer
+                break;
+            case 'price-low':
+                filteredProducts.sort((a, b) => a.price - b.price);
+                break;
+            case 'price-high':
+                filteredProducts.sort((a, b) => b.price - a.price);
+                break;
+            case 'discount':
+                filteredProducts.sort((a, b) => {
+                    const discountA = a.originalPrice ? ((a.originalPrice - a.price) / a.originalPrice) : 0;
+                    const discountB = b.originalPrice ? ((b.originalPrice - b.price) / b.originalPrice) : 0;
+                    return discountB - discountA;
+                });
+                break;
+            case 'popular':
+            default:
+                // Sort by some popularity metric (in this case, trending first)
+                filteredProducts.sort((a, b) => (b.trending || false) - (a.trending || false));
+                break;
+        }
+        
+        renderProducts(filteredProducts);
+    }
+    
+    // Event listeners
+    document.addEventListener('DOMContentLoaded', () => {
+        // Initialize
+        renderProducts(products);
+        updateCartCount();
+        updateCartSidebar();
+        initIndiaMap();
+        
+        // Mobile search toggle
+        document.getElementById('mobileSearchBtn').addEventListener('click', () => {
+            document.getElementById('mobileSearch').classList.toggle('hidden');
+        });
+        
+        // Cart sidebar toggle
+        document.getElementById('cartBtn').addEventListener('click', () => {
+            document.getElementById('cartSidebar').classList.add('open');
+            document.getElementById('overlay').classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+        });
+        
+        document.getElementById('closeCartBtn').addEventListener('click', () => {
+            document.getElementById('cartSidebar').classList.remove('open');
+            document.getElementById('overlay').classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        });
+        
+        // Mobile filter sidebar toggle
+        document.getElementById('filterBtn').addEventListener('click', () => {
+            document.getElementById('mobileFilterSidebar').classList.add('open');
+            document.getElementById('overlay').classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+        });
+        
+        document.getElementById('closeFilterBtn').addEventListener('click', () => {
+            document.getElementById('mobileFilterSidebar').classList.remove('open');
+            document.getElementById('overlay').classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        });
+        
+        // Map view toggle
+        document.getElementById('mapToggleBtn').addEventListener('click', () => {
+            document.getElementById('mapView').classList.remove('hidden');
+            document.getElementById('gridView').classList.add('hidden');
+        });
+        
+        document.getElementById('closeMapBtn').addEventListener('click', () => {
+            document.getElementById('mapView').classList.add('hidden');
+            document.getElementById('gridView').classList.remove('hidden');
+        });
+        
+        // Overlay click
+        document.getElementById('overlay').addEventListener('click', () => {
+            document.getElementById('cartSidebar').classList.remove('open');
+            document.getElementById('mobileFilterSidebar').classList.remove('open');
+            document.getElementById('quickViewModal').classList.add('hidden');
+            document.getElementById('overlay').classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        });
+        
+        // Quick view modal
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('quick-view-btn') || e.target.closest('.quick-view-btn')) {
+                const productId = parseInt(e.target.closest('.quick-view-btn').dataset.id);
+                showQuickView(productId);
+                document.getElementById('overlay').classList.remove('hidden');
+            }
+        });
+        
+        document.getElementById('closeQuickView').addEventListener('click', () => {
+            document.getElementById('quickViewModal').classList.add('hidden');
+            document.getElementById('overlay').classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        });
+        
+        // Thumbnail image change
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('thumbnail-btn') || e.target.closest('.thumbnail-btn')) {
+                const btn = e.target.classList.contains('thumbnail-btn') ? e.target : e.target.closest('.thumbnail-btn');
+                const imageSrc = btn.dataset.image;
+                document.getElementById('quickViewImage').src = imageSrc;
+                
+                // Update active thumbnail
+                document.querySelectorAll('.thumbnail-btn').forEach(thumb => {
+                    thumb.classList.remove('border-red-900');
+                    thumb.classList.add('border-transparent');
+                });
+                btn.classList.add('border-red-900');
+                btn.classList.remove('border-transparent');
+            }
+        });
+        
+        // Quantity buttons
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('quantity-btn') || e.target.closest('.quantity-btn')) {
+                const btn = e.target.classList.contains('quantity-btn') ? e.target : e.target.closest('.quantity-btn');
+                const action = btn.dataset.action;
+                const input = document.getElementById('quickViewQuantity');
+                let value = parseInt(input.value);
+                
+                if (action === 'increase' && value < 10) {
+                    input.value = value + 1;
+                } else if (action === 'decrease' && value > 1) {
+                    input.value = value - 1;
+                }
+            }
+        });
+        
+        // Add to cart from quick view
+        document.getElementById('addToCartBtn').addEventListener('click', () => {
+            const productId = parseInt(document.querySelector('.quick-view-btn').dataset.id);
+            const quantity = parseInt(document.getElementById('quickViewQuantity').value);
+            addToCart(productId, quantity);
+            
+            // Close quick view
+            document.getElementById('quickViewModal').classList.add('hidden');
+            document.getElementById('overlay').classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        });
+        
+        // Buy now from quick view
+        document.getElementById('buyNowBtn').addEventListener('click', () => {
+            const productId = parseInt(document.querySelector('.quick-view-btn').dataset.id);
+            const quantity = parseInt(document.getElementById('quickViewQuantity').value);
+            
+            // Clear cart and add this item
+            cart = [{ id: productId, quantity }];
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            updateCartSidebar();
+            
+            // Redirect to checkout
+            window.location.href = 'checkout.html';
+        });
+        
+        // Add to cart from product grid
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('add-to-cart-btn') || e.target.closest('.add-to-cart-btn')) {
+                const btn = e.target.classList.contains('add-to-cart-btn') ? e.target : e.target.closest('.add-to-cart-btn');
+                const productId = parseInt(btn.dataset.id);
+                addToCart(productId);
+            }
+        });
+        
+        // Cart quantity adjustments
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('cart-qty-btn') || e.target.closest('.cart-qty-btn')) {
+                const btn = e.target.classList.contains('cart-qty-btn') ? e.target : e.target.closest('.cart-qty-btn');
+                const productId = parseInt(btn.dataset.id);
+                const action = btn.dataset.action;
+                
+                const item = cart.find(item => item.id === productId);
+                if (!item) return;
+                
+                if (action === 'increase') {
+                    item.quantity += 1;
+                } else if (action === 'decrease' && item.quantity > 1) {
+                    item.quantity -= 1;
+                }
+                
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCartSidebar();
+            }
+        });
+        
+        // Remove from cart
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('cart-remove-btn') || e.target.closest('.cart-remove-btn')) {
+                const btn = e.target.classList.contains('cart-remove-btn') ? e.target : e.target.closest('.cart-remove-btn');
+                const productId = parseInt(btn.dataset.id);
+                removeFromCart(productId);
+            }
+        });
+        
+        // Price range slider
+        const priceRange = document.getElementById('priceRange');
+        const mobilePriceRange = document.getElementById('mobilePriceRange');
+        
+        priceRange.addEventListener('input', () => {
+            document.getElementById('maxPrice').textContent = `₹${parseInt(priceRange.value).toLocaleString('en-IN')}`;
+        });
+        
+        mobilePriceRange.addEventListener('input', () => {
+            document.getElementById('mobileMaxPrice').textContent = `₹${parseInt(mobilePriceRange.value).toLocaleString('en-IN')}`;
+        });
+        
+        // Apply filters
+        document.getElementById('applyFilters').addEventListener('click', filterProducts);
+        document.getElementById('applyMobileFilters').addEventListener('click', () => {
+            filterProducts();
+            document.getElementById('mobileFilterSidebar').classList.remove('open');
+            document.getElementById('overlay').classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        });
+        
+        // Sort by
+        document.getElementById('sortBy').addEventListener('change', filterProducts);
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+    // Get URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const filterType = urlParams.get('filter');
+    const filterValue = urlParams.get('value');
+
+    // If region filter is present
+    if (filterType === 'region' && filterValue) {
+        filterProductsByRegion(filterValue);
+    }
+});
+
+function filterProductsByRegion(region) {
+    // Get all product elements
+    const products = document.querySelectorAll('.product-card');
+    let foundProducts = false;
+    
+    // Convert region to lowercase for case-insensitive comparison
+    const regionLower = region.toLowerCase();
+    
+    products.forEach(product => {
+        // Get the product's region from data attribute (you need to add this to your product HTML)
+        const productRegion = product.dataset.region.toLowerCase();
+        
+        if (productRegion.includes(regionLower)) {
+            product.style.display = 'block';
+            foundProducts = true;
+        } else {
+            product.style.display = 'none';
+        }
+    });
+    
+    // Show message if no products found
+    const noProductsMsg = document.getElementById('no-products-message');
+    if (noProductsMsg) {
+        noProductsMsg.style.display = foundProducts ? 'none' : 'block';
+        if (!foundProducts) {
+            noProductsMsg.innerHTML = `No products found for ${region}. <a href="products.html" class="text-red-900">Show all products</a>`;
+        }
+    }
+}
+</script>
+</body>
+</html>
+               

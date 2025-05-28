@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders | स्वदेश</title>
+    <meta name="description" content="View your order history with स्वदेश - Authentic Indian Products">
+    
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Hindi Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Hind:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #800000; /* Maroon */
+            --primary-dark: #5a0000;
+            --secondary: #d4af37; /* Gold */
+            --accent: #e5d9b6; /* Cream */
+            --dark: #1a1a1a;
+            --light: #ffffff;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9f9f9;
+        }
+        
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .hindi-font {
+            font-family: 'Hind', sans-serif;
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover:after {
+            width: 100%;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            transition: all 0.3s ease;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .order-card {
+            transition: all 0.3s ease;
+            background-color: white;
+        }
+        
+        .order-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .status-delivered {
+            background-color: #e6f7ee;
+            color: #10b981;
+        }
+        
+        .status-shipped {
+            background-color: #eff6ff;
+            color: #3b82f6;
+        }
+        
+        .status-processing {
+            background-color: #fef3c7;
+            color: #d97706;
+        }
+        
+        .status-cancelled {
+            background-color: #fee2e2;
+            color: #ef4444;
+        }
+    </style>
+</head>
+<body class="antialiased text-gray-900">
+    <!-- Announcement Bar -->
+    <div class="bg-gray-900 text-white text-sm py-2 px-4 text-center">
+        <p>🇮🇳 Free shipping on orders over ₹999 | Use code <strong>SWADES10</strong> for 10% off 🇮🇳</p>
+    </div>
+
+    <!-- Main Navigation -->
+    <header class="sticky top-0 z-50 bg-white shadow-sm">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center space-x-2">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-r from-red-900 to-yellow-600 flex items-center justify-center text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-5-9h10v2H7z"/>
+                            <path d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/>
+                        </svg>
+                    </div>
+                    <span class="text-2xl font-bold font-display text-gray-900 hindi-font">स्वदेश</span>
+                </a>
+                
+                <!-- Desktop Search -->
+                <div class="hidden lg:flex flex-1 max-w-xl mx-6">
+                    <div class="relative w-full">
+                        <input type="text" placeholder="Search for handicrafts, textiles, spices..." 
+                               class="w-full pl-4 pr-12 py-2 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-red-800 focus:border-transparent text-sm">
+                        <button class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-red-900 text-white p-2 rounded-full hover:bg-red-800 transition">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Navigation Links -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="products.html" class="text-gray-700 hover:text-red-900 transition nav-link">Shop</a>
+                    <a href="handicrafts.html" class="text-gray-700 hover:text-red-900 transition nav-link">Handicrafts</a>
+                    <a href="textiles.html" class="text-gray-700 hover:text-red-900 transition nav-link">Textiles</a>
+                    <a href="artisans.html" class="text-gray-700 hover:text-red-900 transition nav-link">Artisans</a>
+                </nav>
+                
+                <!-- User Actions -->
+                <div class="flex items-center space-x-4">
+                    <!-- Mobile Search Button -->
+                    <button id="mobileSearchBtn" class="lg:hidden text-gray-700">
+                        <i class="fas fa-search text-xl"></i>
+                    </button>
+                    
+                    <!-- Profile Dropdown -->
+                    <div class="relative group">
+                        <a href="profile.html" class="text-red-900">
+                            <i id="profileIcon" class="fas fa-user text-xl"></i>
+                        </a>
+                        <div class="absolute right-0 mt-2 w-56 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-10">
+                            <a href="profile.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">My Profile</a>
+                            <a href="orders.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">My Orders</a>
+                            <a href="wishlist.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Wishlist</a>
+                            <div class="border-t border-gray-200 my-1"></div>
+                            <a href="#" id="logoutBtn" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Cart Icon -->
+                    <a href="cart.html" class="relative text-gray-700 hover:text-red-900">
+                        <i class="fas fa-shopping-cart text-xl"></i>
+                        <span class="absolute -top-2 -right-2 bg-red-900 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">3</span>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Mobile Search (hidden by default) -->
+            <div id="mobileSearch" class="lg:hidden hidden mt-3 mb-2">
+                <div class="relative">
+                    <input type="text" placeholder="Search for handicrafts..." 
+                           class="w-full pl-4 pr-12 py-2 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-red-800 focus:border-transparent text-sm">
+                    <button class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-red-900 text-white p-2 rounded-full hover:bg-red-800 transition">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="py-8">
+        <div class="container mx-auto px-4">
+            <!-- Breadcrumbs -->
+            <div class="flex items-center text-sm text-gray-500 mb-6">
+                <a href="index.html" class="hover:text-red-900">Home</a>
+                <span class="mx-2">/</span>
+                <a href="profile.html" class="hover:text-red-900">My Account</a>
+                <span class="mx-2">/</span>
+                <span class="text-gray-700">My Orders</span>
+            </div>
+            
+            <!-- Page Header -->
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
+                <h1 class="text-3xl font-bold font-display mb-4 md:mb-0">My Orders</h1>
+                <div class="flex space-x-3">
+                    <button class="bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-full text-sm font-medium transition">
+                        <i class="fas fa-filter mr-2"></i> Filter
+                    </button>
+                    <button class="bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-full text-sm font-medium transition">
+                        <i class="fas fa-calendar-alt mr-2"></i> Last 6 Months
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Orders List -->
+            <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                <!-- Order 1 -->
+                <div class="order-card border-b border-gray-100 last:border-0 hover:bg-gray-50">
+                    <div class="p-6">
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                            <div class="mb-3 md:mb-0">
+                                <div class="flex items-center space-x-4">
+                                    <h3 class="font-semibold">Order #SWD-2023-4567</h3>
+                                    <span class="px-3 py-1 rounded-full text-xs font-medium status-delivered">Delivered</span>
+                                </div>
+                                <p class="text-sm text-gray-500 mt-1">Placed on 15 Oct 2023</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-semibold">₹6,798</p>
+                                <p class="text-sm text-gray-500">3 items</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-col md:flex-row md:items-center space-y-4 md:space-y-0 md:space-x-6">
+                            <!-- Product 1 -->
+                            <div class="flex items-center space-x-4">
+                                <div class="w-20 h-20 rounded-lg overflow-hidden border border-gray-100">
+                                    <img src="https://images.unsplash.com/photo-1516762689617-e1cffcef479d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1511&q=80" 
+                                         alt="Kashmiri Pashmina Shawl" 
+                                         class="w-full h-full object-cover">
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-sm">Kashmiri Pashmina Shawl</h4>
+                                    <p class="text-gray-500 text-sm">Quantity: 1</p>
+                                    <p class="text-gray-900 text-sm font-medium">₹4,299</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Product 2 -->
+                            <div class="flex items-center space-x-4">
+                                <div class="w-20 h-20 rounded-lg overflow-hidden border border-gray-100">
+                                    <img src="https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80" 
+                                         alt="Madhubani Painting" 
+                                         class="w-full h-full object-cover">
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-sm">Madhubani Painting</h4>
+                                    <p class="text-gray-500 text-sm">Quantity: 1</p>
+                                    <p class="text-gray-900 text-sm font-medium">₹1,499</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Product 3 -->
+                            <div class="flex items-center space-x-4">
+                                <div class="w-20 h-20 rounded-lg overflow-hidden border border-gray-100">
+                                    <img src="https://images.unsplash.com/photo-1558160074-4d7d8bdf4256?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                                         alt="Assam Tea" 
+                                         class="w-full h-full object-cover">
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-sm">Assam Orthodox Tea (500g)</h4>
+                                    <p class="text-gray-500 text-sm">Quantity: 1</p>
+                                    <p class="text-gray-900 text-sm font-medium">₹1,000</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mt-6 pt-4 border-t border-gray-100">
+                            <div class="mb-3 sm:mb-0">
+                                <p class="text-sm text-gray-500">Delivered on 20 Oct 2023</p>
+                                <p class="text-sm">Delivered to: <span class="font-medium">123, Green Park, New Delhi - 110016</span></p>
+                            </div>
+                            <div class="flex space-x-3">
+                                <a href="#" class="bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-full text-sm font-medium hover:bg-gray-50 transition">
+                                    <i class="fas fa-redo-alt mr-2"></i> Buy Again
+                                </a>
+                                <a href="#" class="bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-full text-sm font-medium hover:bg-gray-50 transition">
+                                    <i class="fas fa-file-invoice mr-2"></i> Invoice
+                                </a>
+                                <a href="#" class="bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-full text-sm font-medium hover:bg-gray-50 transition">
+                                    <i class="fas fa-headset mr-2"></i> Help
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Order 2 -->
+                <div class="order-card border-b border-gray-100 last:border-0 hover:bg-gray-50">
+                    <div class="p-6">
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                            <div class="mb-3 md:mb-0">
+                                <div class="flex items-center space-x-4">
+                                    <h3 class="font-semibold">Order #SWD-2023-3421</h3>
+                                    <span class="px-3 py-1 rounded-full text-xs font-medium status-shipped">Shipped</span>
+                                </div>
+                                <p class="text-sm text-gray-500 mt-1">Placed on 5 Oct 2023</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-semibold">₹2,199</p>
+                                <p class="text-sm text-gray-500">1 item</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center space-x-4">
+                            <div class="w-20 h-20 rounded-lg overflow-hidden border border-gray-100">
+                                <img src="https://images.unsplash.com/photo-1583744946564-b52d01e2da64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                                     alt="Dhokra Elephant Sculpture" 
+                                     class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-sm">Dhokra Elephant Sculpture</h4>
+                                <p class="text-gray-500 text-sm">Quantity: 1</p>
+                                <p class="text-gray-900 text-sm font-medium">₹2,199</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mt-6 pt-4 border-t border-gray-100">
+                            <div class="mb-3 sm:mb-0">
+                                <p class="text-sm text-gray-500">Expected delivery by 15 Oct 2023</p>
+                                <p class="text-sm">Shipping to: <span class="font-medium">456, MG Road, Bangalore - 560001</span></p>
+                            </div>
+                            <div class="flex space-x-3">
+                                <a href="#" class="bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-full text-sm font-medium hover:bg-gray-50 transition">
+                                    <i class="fas fa-truck mr-2"></i> Track Order
+                                </a>
+                                <a href="#" class="bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-full text-sm font-medium hover:bg-gray-50 transition">
+                                    <i class="fas fa-file-invoice mr-2"></i> Invoice
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Order 3 -->
+                <div class="order-card border-b border-gray-100 last:border-0 hover:bg-gray-50">
+                    <div class="p-6">
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                            <div class="mb-3 md:mb-0">
+                                <div class="flex items-center space-x-4">
+                                    <h3 class="font-semibold">Order #SWD-2023-2890</h3>
+                                    <span class="px-3 py-1 rounded-full text-xs font-medium status-cancelled">Cancelled</span>
+                                </div>
+                                <p class="text-sm text-gray-500 mt-1">Placed on 20 Sep 2023</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-semibold">₹5,999</p>
+                                <p class="text-sm text-gray-500">1 item</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center space-x-4">
+                            <div class="w-20 h-20 rounded-lg overflow-hidden border border-gray-100">
+                                <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1368&q=80" 
+                                     alt="Banarasi Silk Saree" 
+                                     class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-sm">Banarasi Silk Saree</h4>
+                                <p class="text-gray-500 text-sm">Quantity: 1</p>
+                                <p class="text-gray-900 text-sm font-medium">₹5,999</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mt-6 pt-4 border-t border-gray-100">
+                            <div class="mb-3 sm:mb-0">
+                                <p class="text-sm text-gray-500">Cancelled on 22 Sep 2023</p>
+                                <p class="text-sm">Refund initiated: <span class="font-medium">₹5,999</span></p>
+                            </div>
+                            <div class="flex space-x-3">
+                                <a href="#" class="bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-full text-sm font-medium hover:bg-gray-50 transition">
+                                    <i class="fas fa-redo-alt mr-2"></i> Buy Again
+                                </a>
+                                <a href="#" class="bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-full text-sm font-medium hover:bg-gray-50 transition">
+                                    <i class="fas fa-file-invoice mr-2"></i> Invoice
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pagination -->
+            <div class="flex justify-center mt-8">
+                <nav class="flex items-center space-x-2">
+                    <a href="#" class="px-3 py-1 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 transition">
+                        <i class="fas fa-chevron-left"></i>
+                    </a>
+                    <a href="#" class="px-3 py-1 rounded-full bg-red-900 text-white">1</a>
+                    <a href="#" class="px-3 py-1 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 transition">2</a>
+                    <a href="#" class="px-3 py-1 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 transition">3</a>
+                    <span class="px-2">...</span>
+                    <a href="#" class="px-3 py-1 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 transition">5</a>
+                    <a href="#" class="px-3 py-1 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 transition">
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-12 pb-6">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
+                <!-- Column 1 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 font-display">स्वदेश</h3>
+                    <p class="text-gray-400 mb-4">Celebrating India's rich heritage through authentic handcrafted products.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-pinterest"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Column 2 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 font-display">Shop</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">All Products</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">New Arrivals</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Best Sellers</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Regional Specialties</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Gift Cards</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 3 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 font-display">About</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Our Story</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Artisans</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Sustainability</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Press</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 4 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 font-display">Help</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Contact Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">FAQs</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Shipping</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Returns</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-6 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm mb-4 md:mb-0">© 2023 स्वदेश. All rights reserved.</p>
+                <div class="flex space-x-6">
+                    <img src="https://via.placeholder.com/40x25?text=Visa" alt="Visa" class="h-6">
+                    <img src="https://via.placeholder.com/40x25?text=MC" alt="Mastercard" class="h-6">
+                    <img src="https://via.placeholder.com/40x25?text=PP" alt="PayPal" class="h-6">
+                    <img src="https://via.placeholder.com/40x25?text=UPI" alt="UPI" class="h-6">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile search toggle
+        document.getElementById('mobileSearchBtn').addEventListener('click', function() {
+            document.getElementById('mobileSearch').classList.toggle('hidden');
+        });
+        
+        // Simple logout functionality
+        document.getElementById('logoutBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            localStorage.removeItem('swadesh_session');
+            window.location.href = 'index.html';
+        });
+        
+        // Check login status on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const isLoggedIn = localStorage.getItem('swadesh_session') === 'authenticated';
+            if (!isLoggedIn) {
+                window.location.href = 'profile.html';
+            }
+        });
+    </script>
+</body>
+</html>

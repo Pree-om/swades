@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You | स्वदेश - Authentic Indian Products</title>
+    <meta name="description" content="Thank you for your order with स्वदेश">
+    
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Hindi Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Hind:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #800000; /* Maroon */
+            --primary-dark: #5a0000;
+            --secondary: #d4af37; /* Gold */
+            --accent: #e5d9b6; /* Cream */
+            --dark: #1a1a1a;
+            --light: #ffffff;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9f9f9;
+        }
+        
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .hindi-font {
+            font-family: 'Hind', sans-serif;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #800000 0%, #5a0000 100%);
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            transition: all 0.3s ease;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-secondary {
+            background: var(--secondary);
+            transition: all 0.3s ease;
+            color: var(--dark);
+        }
+        
+        .btn-secondary:hover {
+            background: #c19b0b;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .checkmark-circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: #e5f5e8;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .checkmark {
+            color: #4CAF50;
+            font-size: 48px;
+        }
+    </style>
+</head>
+<body class="antialiased text-gray-900">
+    <!-- Announcement Bar -->
+    <div class="bg-gray-900 text-white text-sm py-2 px-4 text-center">
+        <p>🇮🇳 Free shipping on orders over ₹999 | Use code <strong>PREE10</strong> for 10% off 🇮🇳</p>
+    </div>
+
+    <!-- Main Navigation -->
+    <header class="sticky top-0 z-50 bg-white shadow-sm">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center space-x-2">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-r from-red-900 to-yellow-600 flex items-center justify-center text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-5-9h10v2H7z"/>
+                            <path d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/>
+                        </svg>
+                    </div>
+                    <span class="text-2xl font-bold font-display text-gray-900 hindi-font">स्वदेश</span>
+                </a>
+                
+                <!-- Navigation Links -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="products.html" class="text-gray-700 hover:text-red-900 transition">Shop</a>
+                    <a href="handicrafts.html" class="text-gray-700 hover:text-red-900 transition">Handicrafts</a>
+                    <a href="textiles.html" class="text-gray-700 hover:text-red-900 transition">Textiles</a>
+                    <a href="artisans.html" class="text-gray-700 hover:text-red-900 transition">Artisans</a>
+                </nav>
+                
+                <!-- User Actions -->
+                <div class="flex items-center space-x-4">
+                    <a href="profile.html" class="text-gray-700 hover:text-red-900">
+                        <i class="fas fa-user text-xl"></i>
+                    </a>
+                    <a href="cart.html" class="relative text-gray-700 hover:text-red-900">
+                        <i class="fas fa-shopping-cart text-xl"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Thank You Content -->
+    <section class="py-16 md:py-24">
+        <div class="container mx-auto px-4 max-w-3xl text-center">
+            <div class="checkmark-circle mb-8">
+                <i class="fas fa-check checkmark"></i>
+            </div>
+            
+            <h1 class="text-3xl md:text-4xl font-bold font-display mb-6 text-gray-900">
+                धन्यवाद! Your Order is Confirmed
+            </h1>
+            
+            <p class="text-lg text-gray-600 mb-8">
+                We've received your order #SWD<span id="orderNumber">12345</span> and it's being processed. 
+                You'll receive a confirmation email shortly with all the details.
+            </p>
+            
+            <div class="bg-white rounded-xl shadow-sm p-6 mb-8 text-left">
+                <h3 class="font-bold text-lg mb-4 font-display">Order Summary</h3>
+                
+                <div class="flex justify-between border-b border-gray-100 pb-3 mb-3">
+                    <span class="text-gray-600">Subtotal (3 items)</span>
+                    <span class="font-medium">₹4,597</span>
+                </div>
+                <div class="flex justify-between border-b border-gray-100 pb-3 mb-3">
+                    <span class="text-gray-600">Shipping</span>
+                    <span class="font-medium">FREE</span>
+                </div>
+                <div class="flex justify-between pb-3 mb-3">
+                    <span class="text-gray-600">Discount</span>
+                    <span class="font-medium text-green-600">-₹459</span>
+                </div>
+                <div class="flex justify-between pt-4 border-t border-gray-200">
+                    <span class="font-bold">Total</span>
+                    <span class="font-bold text-lg">₹4,138</span>
+                </div>
+            </div>
+            
+            <div class="mb-8">
+                <h3 class="font-bold text-lg mb-4 font-display">Shipping Information</h3>
+                <p class="text-gray-600 mb-2">Rahul Sharma</p>
+                <p class="text-gray-600 mb-2">123 Heritage Lane, Jaipur</p>
+                <p class="text-gray-600 mb-2">Rajasthan 302001, India</p>
+                <p class="text-gray-600">+91 98765 43210</p>
+            </div>
+            
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="orders.html" class="btn-primary px-8 py-3 rounded-full font-medium text-center">
+                    View Order Details
+                </a>
+                <a href="products.html" class="btn-secondary px-8 py-3 rounded-full font-medium text-center">
+                    Continue Shopping
+                </a>
+            </div>
+            
+            <div class="mt-12 bg-gray-50 rounded-xl p-6 text-left">
+                <h3 class="font-bold text-lg mb-4 font-display">Your Purchase Supports Indian Artisans</h3>
+                <p class="text-gray-600 mb-4">
+                    By shopping with स्वदेश, you're directly supporting traditional artisans and helping preserve 
+                    India's rich cultural heritage. Thank you for making a difference!
+                </p>
+                <a href="artisans.html" class="text-red-900 font-medium hover:underline flex items-center">
+                    Meet the artisans behind your products <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4 max-w-4xl text-center">
+            <h2 class="text-3xl font-bold font-display mb-4">Stay Connected</h2>
+            <p class="text-gray-600 mb-8 max-w-2xl mx-auto">Join our newsletter for exclusive offers, artisan stories, and updates on new products.</p>
+            
+            <form class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+                <input type="email" placeholder="Your email address" 
+                       class="flex-1 px-4 py-3 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-red-800 focus:border-transparent">
+                <button type="submit" class="bg-red-900 text-white px-6 py-3 rounded-full font-medium hover:bg-red-800 transition">
+                    Subscribe
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-12 pb-6">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
+                <!-- Column 1 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 font-display">स्वदेश</h3>
+                    <p class="text-gray-400 mb-4">Celebrating India's rich heritage through authentic handcrafted products.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-pinterest"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Column 2 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 font-display">Shop</h3>
+                    <ul class="space-y-2">
+                        <li><a href="products.html" class="text-gray-400 hover:text-white transition">All Products</a></li>
+                        <li><a href="new-arrivals.html" class="text-gray-400 hover:text-white transition">New Arrivals</a></li>
+                        <li><a href="bestsellers.html" class="text-gray-400 hover:text-white transition">Best Sellers</a></li>
+                        <li><a href="regional.html" class="text-gray-400 hover:text-white transition">Regional Specialties</a></li>
+                        <li><a href="gift-cards.html" class="text-gray-400 hover:text-white transition">Gift Cards</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 3 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 font-display">About</h3>
+                    <ul class="space-y-2">
+                        <li><a href="about.html" class="text-gray-400 hover:text-white transition">Our Story</a></li>
+                        <li><a href="artisans.html" class="text-gray-400 hover:text-white transition">Artisans</a></li>
+                        <li><a href="sustainability.html" class="text-gray-400 hover:text-white transition">Sustainability</a></li>
+                        <li><a href="blog.html" class="text-gray-400 hover:text-white transition">Blog</a></li>
+                        <li><a href="press.html" class="text-gray-400 hover:text-white transition">Press</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 4 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 font-display">Help</h3>
+                    <ul class="space-y-2">
+                        <li><a href="contact.html" class="text-gray-400 hover:text-white transition">Contact Us</a></li>
+                        <li><a href="faq.html" class="text-gray-400 hover:text-white transition">FAQs</a></li>
+                        <li><a href="shipping.html" class="text-gray-400 hover:text-white transition">Shipping</a></li>
+                        <li><a href="returns.html" class="text-gray-400 hover:text-white transition">Returns</a></li>
+                        <li><a href="privacy.html" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-6 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm mb-4 md:mb-0">© 2023 स्वदेश. All rights reserved.</p>
+                <div class="flex space-x-6">
+                    <img src="https://via.placeholder.com/40x25?text=Visa" alt="Visa" class="h-6">
+                    <img src="https://via.placeholder.com/40x25?text=MC" alt="Mastercard" class="h-6">
+                    <img src="https://via.placeholder.com/40x25?text=PP" alt="PayPal" class="h-6">
+                    <img src="https://via.placeholder.com/40x25?text=UPI" alt="UPI" class="h-6">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Generate a random order number on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const orderNumber = Math.floor(10000 + Math.random() * 90000);
+            document.getElementById('orderNumber').textContent = orderNumber;
+            
+            // You could also pull order details from localStorage or URL params in a real implementation
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Textiles | स्वदेश</title>
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Hind:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #800000;
+            --primary-dark: #5a0000;
+            --secondary: #d4af37;
+            --accent: #e5d9b6;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9f9f9;
+        }
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+        .hindi-font {
+            font-family: 'Hind', sans-serif;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover:after {
+            width: 100%;
+        }
+        .textile-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: var(--accent);
+            color: var(--primary);
+            font-weight: bold;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        .fabric-pattern {
+            background-image: url('https://images.unsplash.com/photo-1558769132-cb1aea458c5e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        .cart-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 4px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transform: translateY(-100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        .cart-notification.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="antialiased text-gray-900">
+    <!-- Cart Notification -->
+    <div id="cartNotification" class="cart-notification hidden">
+        <span id="notificationMessage">Item added to cart!</span>
+    </div>
+
+    <!-- Header Section -->
+    <header class="sticky top-0 z-50 bg-white shadow-sm">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center space-x-2">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-r from-red-900 to-yellow-600 flex items-center justify-center text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-5-9h10v2H7z"/>
+                            <path d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/>
+                        </svg>
+                    </div>
+                    <span class="text-2xl font-bold font-display text-gray-900 hindi-font">स्वदेश</span>
+                </a>
+                
+                <!-- Desktop Search -->
+                <div class="hidden lg:flex flex-1 max-w-xl mx-6">
+                    <div class="relative w-full">
+                        <input type="text" placeholder="Search textiles..." 
+                               class="w-full pl-4 pr-12 py-2 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-red-800 focus:border-transparent text-sm">
+                        <button class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-red-900 text-white p-2 rounded-full hover:bg-red-800 transition">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Navigation Links -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="products.html" class="text-gray-700 hover:text-red-900 transition nav-link">Shop</a>
+                    <a href="handicrafts.html" class="text-gray-700 hover:text-red-900 transition nav-link">Handicrafts</a>
+                    <a href="textiles.html" class="text-red-900 transition nav-link">Textiles</a>
+                    <a href="artisans.html" class="text-gray-700 hover:text-red-900 transition nav-link">Artisans</a>
+                </nav>
+                
+                <!-- User Actions -->
+                <div class="flex items-center space-x-4">
+                    <button id="mobileSearchBtn" class="lg:hidden text-gray-700">
+                        <i class="fas fa-search text-xl"></i>
+                    </button>
+                    
+                    <!-- Profile Dropdown -->
+                    <div class="relative group">
+                        <a href="profile.html" class="text-gray-700 hover:text-red-900">
+                            <i id="profileIcon" class="fas fa-user text-xl"></i>
+                        </a>
+                        <div class="absolute right-0 mt-2 w-56 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-10">
+                            <a href="profile.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">My Profile</a>
+                            <a href="orders.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">My Orders</a>
+                            <a href="wishlist.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Wishlist</a>
+                            <div class="border-t border-gray-200 my-1"></div>
+                            <a href="#" id="logoutBtn" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</a>
+                        </div>
+                    </div>
+                    
+                    <a href="cart.html" class="relative text-gray-700 hover:text-red-900">
+                        <i class="fas fa-shopping-cart text-xl"></i>
+                        <span id="cartCount" class="absolute -top-2 -right-2 bg-red-900 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Mobile Search -->
+            <div id="mobileSearch" class="lg:hidden hidden mt-3 mb-2">
+                <div class="relative">
+                    <input type="text" placeholder="Search textiles..." 
+                           class="w-full pl-4 pr-12 py-2 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-red-800 focus:border-transparent text-sm">
+                    <button class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-red-900 text-white p-2 rounded-full hover:bg-red-800 transition">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Textiles Main Content -->
+    <main>
+        <!-- Hero Banner with Fabric Pattern -->
+        <section class="fabric-pattern text-white py-20 relative">
+            <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+            <div class="container mx-auto px-4 text-center relative z-10">
+                <h1 class="text-4xl md:text-5xl font-bold font-display mb-4">Exquisite Indian Textiles</h1>
+                <p class="text-xl max-w-2xl mx-auto">Discover handwoven fabrics that tell stories of India's rich cultural heritage</p>
+            </div>
+        </section>
+
+        <!-- Textile Categories -->
+        <section class="py-12 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-2xl font-bold font-display mb-8 text-center">Explore Our Textile Collections</h2>
+                
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
+                    <!-- Category 1 -->
+                    <a href="#" class="group">
+                        <div class="h-40 rounded-lg overflow-hidden mb-2">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ19jmYCmZRushA5dqOPaHt6Qnp5YHO-BkFig&s" 
+                                 alt="Silk" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        </div>
+                        <h3 class="text-center font-medium">Silk</h3>
+                    </a>
+                    
+                    <!-- Category 2 -->
+                    <a href="#" class="group">
+                        <div class="h-40 rounded-lg overflow-hidden mb-2">
+                            <img src="https://fajrnoor.com/cdn/shop/files/PashminaHijab-Peace1-FajrNoor_grande.jpg?v=1719791904" 
+                                 alt="Pashmina" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        </div>
+                        <h3 class="text-center font-medium">Pashmina</h3>
+                    </a>
+                    
+                    <!-- Category 3 -->
+                    <a href="#" class="group">
+                        <div class="h-40 rounded-lg overflow-hidden mb-2">
+                            <img src="https://5.imimg.com/data5/AX/OW/HN/SELLER-72269125/cotton-rate-per-kg-500x500.jpg" 
+                                 alt="Cotton" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        </div>
+                        <h3 class="text-center font-medium">Cotton</h3>
+                    </a>
+                    
+                    <!-- Category 4 -->
+                    <a href="#" class="group">
+                        <div class="h-40 rounded-lg overflow-hidden mb-2">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPte16C-xRRl6yGiJ3znqHwoSrqhjVDNS0Zw&s" 
+                                 alt="Wool" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        </div>
+                        <h3 class="text-center font-medium">Wool</h3>
+                    </a>
+                    
+                    <!-- Category 5 -->
+                    <a href="#" class="group">
+                        <div class="h-40 rounded-lg overflow-hidden mb-2">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSc0ogTCQFTiLSVxEbAfwIEYwoBCnlQuqWNk8STGQd_F7dLcjXlWGd2SDe2AKnmCBOuv-w&usqp=CAU" 
+                                 alt="Khadi" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        </div>
+                        <h3 class="text-center font-medium">Khadi</h3>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Textile Products -->
+        <section class="py-12 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col md:flex-row justify-between items-center mb-8">
+                    <h2 class="text-2xl font-bold font-display">Handwoven Treasures</h2>
+                    <div class="mt-4 md:mt-0">
+                        <select class="border border-gray-200 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-800 text-sm">
+                            <option>Sort by: Featured</option>
+                            <option>Price: Low to High</option>
+                            <option>Price: High to Low</option>
+                            <option>Newest Arrivals</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+                    <!-- Product 1 -->
+                    <div class="product-card bg-white rounded-lg overflow-hidden shadow-sm relative transition duration-300">
+                        <span class="textile-badge">BANARASI</span>
+                        <div class="relative h-64 overflow-hidden">
+                            <img src="https://img2.ogaanindia.com/pub/media/catalog/product/cache/3f6619daccdb194398d06464ab49fa6e/s/u/suhaniviolet1.jpg" 
+                                 alt="Banarasi Silk Saree" class="w-full h-full object-cover transition duration-500 hover:scale-105">
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold text-sm mb-1">Banarasi Silk Saree</h3>
+                            <p class="text-xs text-gray-500 mb-2">Varanasi, UP</p>
+                            <div class="flex items-center">
+                                <span class="text-base font-bold">₹8,499</span>
+                                <span class="text-gray-500 line-through text-xs ml-2">₹10,999</span>
+                            </div>
+                            <button class="add-to-cart mt-3 w-full bg-red-900 text-white py-2 rounded hover:bg-red-800 transition" 
+                                    data-id="1" 
+                                    data-name="Banarasi Silk Saree" 
+                                    data-price="8499" 
+                                    data-image="https://img2.ogaanindia.com/pub/media/catalog/product/cache/3f6619daccdb194398d06464ab49fa6e/s/u/suhaniviolet1.jpg">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 2 -->
+                    <div class="product-card bg-white rounded-lg overflow-hidden shadow-sm relative transition duration-300">
+                        <span class="textile-badge">KASHMIRI</span>
+                        <div class="relative h-64 overflow-hidden">
+                            <img src="https://www.zamourstore.com/cdn/shop/files/21-07-2023MICHEALE00981.jpg?v=1743766362" 
+                                 alt="Pashmina Shawl" class="w-full h-full object-cover transition duration-500 hover:scale-105">
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold text-sm mb-1">Pashmina Shawl</h3>
+                            <p class="text-xs text-gray-500 mb-2">Kashmir</p>
+                            <div class="flex items-center">
+                                <span class="text-base font-bold">₹12,999</span>
+                            </div>
+                            <button class="add-to-cart mt-3 w-full bg-red-900 text-white py-2 rounded hover:bg-red-800 transition" 
+                                    data-id="2" 
+                                    data-name="Pashmina Shawl" 
+                                    data-price="12999" 
+                                    data-image="https://www.zamourstore.com/cdn/shop/files/21-07-2023MICHEALE00981.jpg?v=1743766362">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 3 -->
+                    <div class="product-card bg-white rounded-lg overflow-hidden shadow-sm relative transition duration-300">
+                        <span class="textile-badge">KANJEEVARAM</span>
+                        <div class="relative h-64 overflow-hidden">
+                            <img src="https://sudathi.com/cdn/shop/files/3579S2516_1.jpg?v=1709816476&width=1500" 
+                                 alt="Kanjeevaram Saree" class="w-full h-full object-cover transition duration-500 hover:scale-105">
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold text-sm mb-1">Kanjeevaram Silk Saree</h3>
+                            <p class="text-xs text-gray-500 mb-2">Tamil Nadu</p>
+                            <div class="flex items-center">
+                                <span class="text-base font-bold">₹9,999</span>
+                            </div>
+                            <button class="add-to-cart mt-3 w-full bg-red-900 text-white py-2 rounded hover:bg-red-800 transition" 
+                                    data-id="3" 
+                                    data-name="Kanjeevaram Silk Saree" 
+                                    data-price="9999" 
+                                    data-image="https://sudathi.com/cdn/shop/files/3579S2516_1.jpg?v=1709816476&width=1500">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 4 -->
+                    <div class="product-card bg-white rounded-lg overflow-hidden shadow-sm relative transition duration-300">
+                        <span class="textile-badge">KHADI</span>
+                        <div class="relative h-64 overflow-hidden">
+                            <img src="https://www.weaversindia.co.in/cdn/shop/files/bisque-handwoven-hand-spun-springs-organic-cotton-men-kurta-weaversindia-1.webp?v=1728126790" 
+                                 alt="Khadi Kurta" class="w-full h-full object-cover transition duration-500 hover:scale-105">
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-semibold text-sm mb-1">Handspun Khadi Kurta</h3>
+                            <p class="text-xs text-gray-500 mb-2">West Bengal</p>
+                            <div class="flex items-center">
+                                <span class="text-base font-bold">₹2,499</span>
+                            </div>
+                            <button class="add-to-cart mt-3 w-full bg-red-900 text-white py-2 rounded hover:bg-red-800 transition" 
+                                    data-id="4" 
+                                    data-name="Handspun Khadi Kurta" 
+                                    data-price="2499" 
+                                    data-image="https://www.weaversindia.co.in/cdn/shop/files/bisque-handwoven-hand-spun-springs-organic-cotton-men-kurta-weaversindia-1.webp?v=1728126790">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Weaving Techniques Section -->
+        <section class="py-12 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-2xl font-bold font-display mb-8 text-center">Traditional Weaving Techniques</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Technique 1 -->
+                    <div class="bg-gray-50 rounded-xl p-6">
+                        <div class="h-48 mb-4 rounded-lg overflow-hidden">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDLPMvD-MwzCXFYlLHGVo5o5IAhX05cHhsSw&s" 
+                                 alt="Handloom" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">Handloom Weaving</h3>
+                        <p class="text-gray-600">The traditional method of weaving fabric by hand, preserving ancient techniques passed down through generations.</p>
+                    </div>
+                    
+                    <!-- Technique 2 -->
+                    <div class="bg-gray-50 rounded-xl p-6">
+                        <div class="h-48 mb-4 rounded-lg overflow-hidden">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTPnc2K9GIR36YuqrZpElN29ml4_u5M9h3og&s" 
+                                 alt="Ikat" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">Ikat Dyeing</h3>
+                        <p class="text-gray-600">A resist dyeing technique where threads are tie-dyed before weaving to create intricate patterns.</p>
+                    </div>
+                    
+                    <!-- Technique 3 -->
+                    <div class="bg-gray-50 rounded-xl p-6">
+                        <div class="h-48 mb-4 rounded-lg overflow-hidden">
+                            <img src="https://5.imimg.com/data5/SELLER/Default/2023/11/358208340/VG/CF/YT/4852401/mix-design-wooden-printing-blocks.jpeg" 
+                                 alt="Block Print" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">Block Printing</h3>
+                        <p class="text-gray-600">Hand-carved wooden blocks are used to stamp designs onto fabric, creating unique patterns.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-12 pb-6">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 font-display hindi-font">स्वदेश</h3>
+                    <p class="text-gray-400 mb-4">Celebrating India's rich heritage through authentic handcrafted products.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 font-display">Shop</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">All Products</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Textiles</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 font-display">Help</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Contact Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">FAQs</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-6 text-center">
+                <p class="text-gray-400 text-sm">© 2023 स्वदेश. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Cart functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize cart if it doesn't exist
+            if (!localStorage.getItem('swadesh_cart')) {
+                localStorage.setItem('swadesh_cart', JSON.stringify([]));
+            }
+            
+            // Update cart count
+            updateCartCount();
+            
+            // Add to cart buttons
+            document.querySelectorAll('.add-to-cart').forEach(button => {
+                button.addEventListener('click', function() {
+                    const product = {
+                        id: this.getAttribute('data-id'),
+                        name: this.getAttribute('data-name'),
+                        price: this.getAttribute('data-price'),
+                        image: this.getAttribute('data-image'),
+                        quantity: 1
+                    };
+                    
+                    addToCart(product);
+                    showNotification(`${product.name} added to cart!`);
+                });
+            });
+            
+            // Mobile search toggle
+            document.getElementById('mobileSearchBtn').addEventListener('click', function() {
+                document.getElementById('mobileSearch').classList.toggle('hidden');
+            });
+
+            // Check login status and update profile icon
+            const isLoggedIn = localStorage.getItem('swadesh_session') === 'authenticated';
+            const profileIcon = document.getElementById('profileIcon');
+            
+            if (isLoggedIn && profileIcon) {
+                profileIcon.classList.add('text-red-900');
+                profileIcon.classList.remove('text-gray-700');
+            }
+
+            // Logout functionality
+            document.getElementById('logoutBtn')?.addEventListener('click', function(e) {
+                e.preventDefault();
+                localStorage.removeItem('swadesh_session');
+                window.location.href = 'profile.html';
+            });
+        });
+
+        // Cart functions
+        function addToCart(product) {
+            const cart = JSON.parse(localStorage.getItem('swadesh_cart'));
+            const existingItem = cart.find(item => item.id === product.id);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push(product);
+            }
+            
+            localStorage.setItem('swadesh_cart', JSON.stringify(cart));
+            updateCartCount();
+        }
+
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('swadesh_cart'));
+            const count = cart.reduce((total, item) => total + item.quantity, 0);
+            document.getElementById('cartCount').textContent = count;
+        }
+
+        function showNotification(message) {
+            const notification = document.getElementById('cartNotification');
+            const messageElement = document.getElementById('notificationMessage');
+            
+            messageElement.textContent = message;
+            notification.classList.remove('hidden');
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => notification.classList.add('hidden'), 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

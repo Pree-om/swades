@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | स्वदेश</title>
+    <meta name="description" content="Complete your purchase of authentic Indian handcrafted products">
+    
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Hindi Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Hind:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #800000; /* Maroon */
+            --primary-dark: #5a0000;
+            --secondary: #d4af37; /* Gold */
+            --accent: #e5d9b6; /* Cream */
+            --dark: #1a1a1a;
+            --light: #ffffff;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9f9f9;
+        }
+        
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .hindi-font {
+            font-family: 'Hind', sans-serif;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            transition: all 0.3s ease;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-secondary {
+            background: var(--secondary);
+            transition: all 0.3s ease;
+            color: var(--dark);
+        }
+        
+        .btn-secondary:hover {
+            background: #c19b0b;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .checkout-step {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .checkout-step:before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background-color: #e2e8f0;
+        }
+        
+        .checkout-step.active:before {
+            background-color: var(--primary);
+        }
+        
+        .checkout-step.completed:before {
+            background-color: var(--secondary);
+        }
+        
+        .step-number {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            color: #64748b;
+        }
+        
+        .checkout-step.active .step-number {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .checkout-step.completed .step-number {
+            background-color: var(--secondary);
+            color: var(--dark);
+        }
+        
+        .payment-method {
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .payment-method:hover {
+            border-color: var(--primary);
+        }
+        
+        .payment-method.selected {
+            border-color: var(--primary);
+            background-color: rgba(128, 0, 0, 0.05);
+        }
+        
+        input[type="radio"]:checked + .payment-method {
+            border-color: var(--primary);
+            background-color: rgba(128, 0, 0, 0.05);
+        }
+        
+        .order-summary-item {
+            border-bottom: 1px dashed #e2e8f0;
+            padding-bottom: 12px;
+            margin-bottom: 12px;
+        }
+        
+        .coupon-input {
+            transition: all 0.3s ease;
+        }
+        
+        .coupon-input:focus {
+            box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.5);
+        }
+        
+        /* New styles for payment method selection */
+        .payment-radio {
+            position: absolute;
+            opacity: 0;
+        }
+        
+        .payment-radio:checked + .payment-method {
+            border-color: var(--primary);
+            background-color: rgba(128, 0, 0, 0.05);
+        }
+        
+        .payment-radio:checked + .payment-method .checkmark {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .payment-radio:checked + .payment-method .checkmark:after {
+            display: block;
+        }
+        
+        .checkmark {
+            position: relative;
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+            top: 4px;
+            left: 4px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: white;
+        }
+    </style>
+</head>
+<body class="antialiased text-gray-900">
+    <!-- Announcement Bar -->
+    <div class="bg-gray-900 text-white text-sm py-2 px-4 text-center">
+        <p>🇮🇳 Free shipping on orders over ₹999 | Use code <strong>SWADES10</strong> for 10% off 🇮🇳</p>
+    </div>
+
+    <!-- Main Navigation -->
+    <header class="sticky top-0 z-50 bg-white shadow-sm">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center space-x-2">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-r from-red-900 to-yellow-600 flex items-center justify-center text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-5-9h10v2H7z"/>
+                            <path d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/>
+                        </svg>
+                    </div>
+                    <span class="text-2xl font-bold font-display text-gray-900 hindi-font">स्वदेश</span>
+                </a>
+                
+                <!-- Checkout Progress -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <div class="flex items-center text-sm">
+                        <div class="flex items-center text-primary-900">
+                            <div class="w-6 h-6 rounded-full bg-red-900 flex items-center justify-center text-white mr-2">
+                                <i class="fas fa-shopping-cart text-xs"></i>
+                            </div>
+                            <span>Cart</span>
+                        </div>
+                        <div class="w-16 h-px bg-gray-300 mx-2"></div>
+                        <div class="flex items-center font-medium">
+                            <div class="w-6 h-6 rounded-full bg-red-900 flex items-center justify-center text-white mr-2">
+                                <span>2</span>
+                            </div>
+                            <span>Details</span>
+                        </div>
+                        <div class="w-16 h-px bg-gray-300 mx-2"></div>
+                        <div class="flex items-center text-gray-500">
+                            <div class="w-6 h-6 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 mr-2">
+                                <span>3</span>
+                            </div>
+                            <span>Payment</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Secure Checkout Badge -->
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-lock text-red-900"></i>
+                    <span class="text-sm font-medium">Secure Checkout</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <div class="flex flex-col lg:flex-row gap-8">
+            <!-- Checkout Form -->
+            <div class="lg:w-2/3">
+                <h1 class="text-2xl font-bold font-display mb-6">Checkout</h1>
+                
+                <!-- Checkout Steps -->
+                <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+                    <!-- Step 1: Contact Information -->
+                    <div class="checkout-step active">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h2 class="font-bold text-lg mb-4">Contact Information</h2>
+                            <div class="mb-4">
+                                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                                <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-800 focus:border-transparent" placeholder="your@email.com">
+                            </div>
+                            <div class="flex items-center mb-6">
+                                <input type="checkbox" id="email-offers" class="h-4 w-4 text-red-900 focus:ring-red-800 border-gray-300 rounded">
+                                <label for="email-offers" class="ml-2 block text-sm text-gray-700">Email me with news and offers</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 2: Shipping Address -->
+                    <div class="checkout-step active">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h2 class="font-bold text-lg mb-4">Shipping Address</h2>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <label for="first-name" class="block text-sm font-medium text-gray-700 mb-1">First Name</label>
+                                    <input type="text" id="first-name" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-800 focus:border-transparent" placeholder="First Name">
+                                </div>
+                                <div>
+                                    <label for="last-name" class="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
+                                    <input type="text" id="last-name" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-800 focus:border-transparent" placeholder="Last Name">
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label for="address" class="block text-sm font-medium text-gray-700 mb-1">Address</label>
+                                <input type="text" id="address" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-800 focus:border-transparent" placeholder="Street address">
+                            </div>
+                            <div class="mb-4">
+                                <input type="text" id="address-2" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-800 focus:border-transparent" placeholder="Apartment, suite, etc. (optional)">
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                                <div>
+                                    <label for="city" class="block text-sm font-medium text-gray-700 mb-1">City</label>
+                                    <input type="text" id="city" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-800 focus:border-transparent" placeholder="City">
+                                </div>
+                                <div>
+                                    <label for="state" class="block text-sm font-medium text-gray-700 mb-1">State</label>
+                                    <select id="state" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-800 focus:border-transparent">
+                                        <option value="">Select State</option>
+                                        <option value="MH">Maharashtra</option>
+                                        <option value="DL">Delhi</option>
+                                        <option value="KA">Karnataka</option>
+                                        <option value="TN">Tamil Nadu</option>
+                                        <option value="UP">Uttar Pradesh</option>
+                                        <option value="GJ">Gujarat</option>
+                                        <option value="RJ">Rajasthan</option>
+                                        <option value="WB">West Bengal</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="pincode" class="block text-sm font-medium text-gray-700 mb-1">PIN Code</label>
+                                    <input type="text" id="pincode" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-800 focus:border-transparent" placeholder="PIN Code">
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone</label>
+                                <input type="tel" id="phone" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-800 focus:border-transparent" placeholder="Phone number">
+                                <p class="text-xs text-gray-500 mt-1">For delivery updates</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 3: Shipping Method -->
+                    <div class="checkout-step active">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h2 class="font-bold text-lg mb-4">Shipping Method</h2>
+                            <div class="space-y-4">
+                                <label class="flex items-start p-4 border border-gray-200 rounded-lg cursor-pointer hover:border-red-900">
+                                    <input type="radio" name="shipping" class="mt-1" checked>
+                                    <div class="ml-3">
+                                        <div class="flex justify-between">
+                                            <span class="font-medium">Standard Shipping</span>
+                                            <span class="font-medium">₹99</span>
+                                        </div>
+                                        <p class="text-sm text-gray-500 mt-1">Delivery in 5-7 business days</p>
+                                    </div>
+                                </label>
+                                <label class="flex items-start p-4 border border-gray-200 rounded-lg cursor-pointer hover:border-red-900">
+                                    <input type="radio" name="shipping" class="mt-1">
+                                    <div class="ml-3">
+                                        <div class="flex justify-between">
+                                            <span class="font-medium">Express Shipping</span>
+                                            <span class="font-medium">₹199</span>
+                                        </div>
+                                        <p class="text-sm text-gray-500 mt-1">Delivery in 2-3 business days</p>
+                                    </div>
+                                </label>
+                                <label class="flex items-start p-4 border border-gray-200 rounded-lg cursor-pointer hover:border-red-900">
+                                    <input type="radio" name="shipping" class="mt-1">
+                                    <div class="ml-3">
+                                        <div class="flex justify-between">
+                                            <span class="font-medium">Free Shipping</span>
+                                            <span class="font-medium">₹0</span>
+                                        </div>
+                                        <p class="text-sm text-gray-500 mt-1">Free delivery on orders over ₹999 (7-10 days)</p>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 4: Payment Method -->
+                    <div class="checkout-step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h2 class="font-bold text-lg mb-4">Payment Method</h2>
+                            <div class="space-y-4">
+                                <div>
+                                    <input type="radio" id="credit-card" name="payment" class="payment-radio" checked>
+                                    <label for="credit-card" class="payment-method block">
+                                        <div class="flex items-center">
+                                            <span class="checkmark"></span>
+                                            <span class="font-medium">Credit/Debit Card</span>
+                                        </div>
+                                        <div class="mt-4 pl-9 grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            <div>
+                                                <label for="card-number" class="block text-sm font-medium text-gray-700 mb-1">Card Number</label>
+                                                <input type="text" id="card-number" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-800 focus:border-transparent" placeholder="1234 5678 9012 3456">
+                                            </div>
+                                            <div>
+                                                <label for="card-name" class="block text-sm font-medium text-gray-700 mb-1">Name on Card</label>
+                                                <input type="text" id="card-name" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-800 focus:border-transparent" placeholder="Full Name">
+                                            </div>
+                                            <div>
+                                                <label for="card-expiry" class="block text-sm font-medium text-gray-700 mb-1">Expiry Date</label>
+                                                <input type="text" id="card-expiry" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-800 focus:border-transparent" placeholder="MM/YY">
+                                            </div>
+                                            <div>
+                                                <label for="card-cvv" class="block text-sm font-medium text-gray-700 mb-1">CVV</label>
+                                                <input type="text" id="card-cvv" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-800 focus:border-transparent" placeholder="123">
+                                            </div>
+                                        </div>
+                                        <div class="mt-4 pl-9 flex items-center">
+                                            <img src="https://via.placeholder.com/40x25?text=Visa" alt="Visa" class="h-6 mr-2">
+                                            <img src="https://via.placeholder.com/40x25?text=MC" alt="Mastercard" class="h-6 mr-2">
+                                            <img src="https://via.placeholder.com/40x25?text=Rupay" alt="Rupay" class="h-6">
+                                        </div>
+                                    </label>
+                                </div>
+                                
+                                <div>
+                                    <input type="radio" id="upi" name="payment" class="payment-radio">
+                                    <label for="upi" class="payment-method block">
+                                        <div class="flex items-center">
+                                            <span class="checkmark"></span>
+                                            <span class="font-medium">UPI</span>
+                                        </div>
+                                        <div class="mt-4 pl-9">
+                                            <div class="mb-4">
+                                                <label for="upi-id" class="block text-sm font-medium text-gray-700 mb-1">UPI ID</label>
+                                                <input type="text" id="upi-id" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-800 focus:border-transparent" placeholder="yourname@upi">
+                                            </div>
+                                            <div class="flex items-center space-x-4">
+                                                <img src="https://via.placeholder.com/40x25?text=GPay" alt="Google Pay" class="h-8">
+                                                <img src="https://via.placeholder.com/40x25?text=PhonePe" alt="PhonePe" class="h-8">
+                                                <img src="https://via.placeholder.com/40x25?text=Paytm" alt="Paytm" class="h-8">
+                                                <img src="https://via.placeholder.com/40x25?text=BHIM" alt="BHIM" class="h-8">
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+                                
+                                <div>
+                                    <input type="radio" id="net-banking" name="payment" class="payment-radio">
+                                    <label for="net-banking" class="payment-method block">
+                                        <div class="flex items-center">
+                                            <span class="checkmark"></span>
+                                            <span class="font-medium">Net Banking</span>
+                                        </div>
+                                        <div class="mt-4 pl-9">
+                                            <select class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-800 focus:border-transparent">
+                                                <option value="">Select your bank</option>
+                                                <option value="sbi">State Bank of India</option>
+                                                <option value="hdfc">HDFC Bank</option>
+                                                <option value="icici">ICICI Bank</option>
+                                                <option value="axis">Axis Bank</option>
+                                                <option value="pnb">Punjab National Bank</option>
+                                            </select>
+                                        </div>
+                                    </label>
+                                </div>
+                                
+                                <div>
+                                    <input type="radio" id="cod" name="payment" class="payment-radio">
+                                    <label for="cod" class="payment-method block">
+                                        <div class="flex items-center">
+                                            <span class="checkmark"></span>
+                                            <span class="font-medium">Cash on Delivery</span>
+                                        </div>
+                                        <div class="mt-2 pl-9 text-sm text-gray-600">
+                                            Pay when your order is delivered. Additional ₹50 charge may apply.
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <button type="button" id="continueToPayment" class="w-full bg-red-900 text-white py-3 px-6 rounded-md font-medium hover:bg-red-800 transition focus:outline-none focus:ring-2 focus:ring-red-800 focus:ring-offset-2">
+                            Continue to Payment
+                        </button>
+                        <a href="cart.html" class="block text-center text-red-900 hover:text-red-700 mt-4">
+                            <i class="fas fa-arrow-left mr-2"></i> Return to cart
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Secure Checkout Footer -->
+                <div class="bg-white rounded-lg shadow-sm p-6 text-center">
+                    <div class="flex justify-center space-x-6 mb-4">
+                        <i class="fas fa-lock text-red-900 text-xl"></i>
+                        <i class="fab fa-cc-visa text-gray-700 text-xl"></i>
+                        <i class="fab fa-cc-mastercard text-gray-700 text-xl"></i>
+                        <i class="fas fa-rupee-sign text-gray-700 text-xl"></i>
+                    </div>
+                    <p class="text-sm text-gray-600">Your payment information is processed securely. We do not store your credit card details.</p>
+                </div>
+            </div>
+            
+            <!-- Order Summary -->
+            <div class="lg:w-1/3">
+                <div class="bg-white rounded-lg shadow-sm p-6 sticky top-4">
+                    <h2 class="font-bold text-lg font-display mb-6">Order Summary</h2>
+                    
+                    <!-- Products -->
+                    <div class="space-y-4 mb-6">
+                        <div class="flex items-start">
+                            <div class="w-20 h-20 rounded-md overflow-hidden mr-4">
+                                <img src="https://images.unsplash.com/photo-1738053473109-0536f918f4c3?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                                     alt="Jaipur Blue Pottery Vase" 
+                                     class="w-full h-full object-cover">
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-medium">Jaipur Blue Pottery Vase</h3>
+                                <p class="text-sm text-gray-500">Handicrafts</p>
+                                <div class="flex justify-between items-center mt-1">
+                                    <span class="text-sm">₹2,499 × 1</span>
+                                    <span class="font-medium">₹2,499</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-20 h-20 rounded-md overflow-hidden mr-4">
+                                <img src="https://images.unsplash.com/photo-1595595175455-740365521cd3?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                                     alt="Kashmiri Pashmina Shawl" 
+                                     class="w-full h-full object-cover">
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-medium">Kashmiri Pashmina Shawl</h3>
+                                <p class="text-sm text-gray-500">Textiles</p>
+                                <div class="flex justify-between items-center mt-1">
+                                    <span class="text-sm">₹4,299 × 1</span>
+                                    <span class="font-medium">₹4,299</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Coupon Code -->
+                    <div class="mb-6">
+                        <div class="flex items-center mb-2">
+                            <input type="text" id="coupon-code" class="flex-1 px-4 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent coupon-input" placeholder="Coupon code">
+                            <button class="bg-yellow-500 text-gray-900 px-4 py-2 rounded-r-md font-medium hover:bg-yellow-600 transition">
+                                Apply
+                            </button>
+                        </div>
+                        <p class="text-green-600 text-sm hidden" id="coupon-success">Coupon applied successfully!</p>
+                        <p class="text-red-600 text-sm hidden" id="coupon-error">Invalid coupon code</p>
+                    </div>
+                    
+                    <!-- Order Totals -->
+                    <div class="space-y-3 mb-6">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Subtotal</span>
+                            <span>₹6,798</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Shipping</span>
+                            <span>₹99</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Discount</span>
+                            <span class="text-green-600">-₹680</span>
+                        </div>
+                        <div class="flex justify-between border-t border-gray-200 pt-3">
+                            <span class="font-medium">Total</span>
+                            <span class="font-bold text-lg">₹6,217</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Secure Checkout Button -->
+                    <button type="button" id="placeOrderBtn" class="w-full bg-red-900 text-white py-3 px-6 rounded-md font-medium hover:bg-red-800 transition focus:outline-none focus:ring-2 focus:ring-red-800 focus:ring-offset-2">
+                        Place Order
+                    </button>
+                    
+                    <!-- Guarantee Badges -->
+                    <div class="mt-6 pt-6 border-t border-gray-200">
+                        <div class="flex flex-col space-y-4">
+                            <div class="flex items-center">
+                                <i class="fas fa-shield-alt text-red-900 mr-3"></i>
+                                <span class="text-sm">Secure Payment</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-undo text-red-900 mr-3"></i>
+                                <span class="text-sm">Easy Returns</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-headset text-red-900 mr-3"></i>
+                                <span class="text-sm">24/7 Support</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-12 pb-6 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
+                <!-- Column 1 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 font-display">स्वदेश</h3>
+                    <p class="text-gray-400 mb-4">Celebrating India's rich heritage through authentic handcrafted products.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-pinterest"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Column 2 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 font-display">Shop</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">All Products</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">New Arrivals</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Best Sellers</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Regional Specialties</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Gift Cards</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 3 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 font-display">About</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Our Story</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Artisans</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Sustainability</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Press</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 4 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 font-display">Help</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Contact Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">FAQs</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Shipping</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Returns</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-6 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm mb-4 md:mb-0">© 2023 स्वदेश. All rights reserved.</p>
+                <div class="flex space-x-6">
+                    <img src="https://via.placeholder.com/40x25?text=Visa" alt="Visa" class="h-6">
+                    <img src="https://via.placeholder.com/40x25?text=MC" alt="Mastercard" class="h-6">
+                    <img src="https://via.placeholder.com/40x25?text=PP" alt="PayPal" class="h-6">
+                    <img src="https://via.placeholder.com/40x25?text=UPI" alt="UPI" class="h-6">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+          // Payment method selection
+          const paymentMethods = document.querySelectorAll('input[name="payment"]');
+          paymentMethods.forEach(method => {
+              method.addEventListener('change', function() {
+                  document.querySelectorAll('.payment-method').forEach(pm => {
+                      pm.classList.remove('selected');
+                      const radio = pm.previousElementSibling;
+                      if (radio.checked) {
+                          pm.classList.add('selected');
+                      }
+                  });
+              });
+          });
+          
+          // Initialize first payment method as selected
+          if (paymentMethods.length > 0) {
+              paymentMethods[0].dispatchEvent(new Event('change'));
+          }
+          
+          // Coupon code validation
+          const couponCode = document.getElementById('coupon-code');
+          const couponSuccess = document.getElementById('coupon-success');
+          const couponError = document.getElementById('coupon-error');
+          const applyCouponBtn = document.querySelector('#coupon-code + button');
+          
+          couponCode.addEventListener('input', function() {
+              couponSuccess.classList.add('hidden');
+              couponError.classList.add('hidden');
+          });
+          
+          applyCouponBtn.addEventListener('click', function() {
+              const validCoupons = ['SWADES10', 'SWADES15', 'WELCOME20'];
+              const enteredCoupon = couponCode.value.trim().toUpperCase();
+              
+              if (enteredCoupon === '') {
+                  couponError.textContent = 'Please enter a coupon code';
+                  couponError.classList.remove('hidden');
+                  return;
+              }
+              
+              if (validCoupons.includes(enteredCoupon)) {
+                  couponSuccess.textContent = 'Coupon applied successfully!';
+                  couponSuccess.classList.remove('hidden');
+                  couponError.classList.add('hidden');
+                  
+                  // Here you would typically update the order total via AJAX
+                  // For demo purposes, we'll just show the success message
+              } else {
+                  couponError.textContent = 'Invalid coupon code';
+                  couponError.classList.remove('hidden');
+                  couponSuccess.classList.add('hidden');
+              }
+          });
+          
+          // Continue to payment button
+          const continueToPaymentBtn = document.getElementById('continueToPayment');
+          const paymentStep = document.querySelector('.checkout-step:nth-child(4)');
+          
+          continueToPaymentBtn.addEventListener('click', function() {
+              // Validate form fields before proceeding
+              const email = document.getElementById('email').value;
+              const firstName = document.getElementById('first-name').value;
+              const lastName = document.getElementById('last-name').value;
+              const address = document.getElementById('address').value;
+              const city = document.getElementById('city').value;
+              const state = document.getElementById('state').value;
+              const pincode = document.getElementById('pincode').value;
+              const phone = document.getElementById('phone').value;
+              
+              if (!email || !firstName || !lastName || !address || !city || !state || !pincode || !phone) {
+                  alert('Please fill in all required fields before proceeding to payment.');
+                  return;
+              }
+              
+              // Scroll to payment section
+              paymentStep.scrollIntoView({ behavior: 'smooth' });
+              
+              // Update checkout progress in header
+              document.querySelectorAll('.flex.items-center.text-sm div:nth-child(3)').forEach(el => {
+                  el.innerHTML = '<div class="w-6 h-6 rounded-full bg-red-900 flex items-center justify-center text-white mr-2"><span>3</span></div><span>Payment</span>';
+              });
+          });
+          
+          // Place order button
+          const placeOrderBtn = document.getElementById('placeOrderBtn');
+          
+          placeOrderBtn.addEventListener('click', function() {
+              // Validate payment method
+              const selectedPayment = document.querySelector('input[name="payment"]:checked');
+              
+              if (!selectedPayment) {
+                  alert('Please select a payment method');
+                  return;
+              }
+              
+              // Additional validation based on payment method
+              if (selectedPayment.id === 'credit-card') {
+                  const cardNumber = document.getElementById('card-number').value;
+                  const cardName = document.getElementById('card-name').value;
+                  const cardExpiry = document.getElementById('card-expiry').value;
+                  const cardCvv = document.getElementById('card-cvv').value;
+                  
+                  if (!cardNumber || !cardName || !cardExpiry || !cardCvv) {
+                      alert('Please fill in all credit card details');
+                      return;
+                  }
+              } else if (selectedPayment.id === 'upi') {
+                  const upiId = document.getElementById('upi-id').value;
+                  if (!upiId) {
+                      alert('Please enter your UPI ID');
+                      return;
+                  }
+              } else if (selectedPayment.id === 'net-banking') {
+                  const bank = document.querySelector('#net-banking + .payment-method select').value;
+                  if (!bank) {
+                      alert('Please select your bank');
+                      return;
+                  }
+              }
+              
+              // Show loading state
+              placeOrderBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Processing...';
+              placeOrderBtn.disabled = true;
+              
+              // Simulate order processing
+              setTimeout(function() {
+                  // Redirect to thank you page
+                  window.location.href = 'thank-you.html';
+              }, 2000);
+          });
+          
+          // Show payment method details when selected
+          paymentMethods.forEach(method => {
+              method.addEventListener('change', function() {
+                  const paymentDetails = this.nextElementSibling.querySelector('.mt-4');
+                  if (paymentDetails) {
+                      document.querySelectorAll('.payment-method .mt-4').forEach(details => {
+                          details.style.display = 'none';
+                      });
+                      paymentDetails.style.display = 'block';
+                  }
+              });
+          });
+          
+          // Initialize first payment method's details as visible
+          const firstPaymentDetails = document.querySelector('.payment-method .mt-4');
+          if (firstPaymentDetails) {
+              firstPaymentDetails.style.display = 'block';
+          }
+      });
+  </script>
+</body>
+</html>

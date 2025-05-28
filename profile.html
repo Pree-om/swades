@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Profile | स्वदेश</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const loginSection = document.getElementById("loginSection");
+      const registerSection = document.getElementById("registerSection");
+      const dashboard = document.getElementById("dashboard");
+      const sellerForm = document.getElementById("sellerForm");
+      const productList = document.getElementById("productList");
+
+      const session = JSON.parse(localStorage.getItem("session"));
+
+      if (session) {
+        loginSection.classList.add("hidden");
+        registerSection.classList.add("hidden");
+        dashboard.classList.remove("hidden");
+
+        const name = session.name || session.email.split("@")[0];
+        document.getElementById("welcome").innerText = `Welcome, ${name} (${session.role})`;
+
+        if (session.role === "seller") {
+          sellerForm.classList.remove("hidden");
+          loadProducts(session.email);
+        }
+      }
+
+      document.getElementById("toRegister").addEventListener("click", () => {
+        loginSection.classList.add("hidden");
+        registerSection.classList.remove("hidden");
+      });
+
+      document.getElementById("toLogin").addEventListener("click", () => {
+        registerSection.classList.add("hidden");
+        loginSection.classList.remove("hidden");
+      });
+
+      document.getElementById("registerForm").addEventListener("submit", e => {
+        e.preventDefault();
+        const name = document.getElementById("regName").value;
+        const email = document.getElementById("regEmail").value;
+        const password = document.getElementById("regPassword").value;
+        const role = document.getElementById("regRole").value;
+
+        const users = JSON.parse(localStorage.getItem("users") || "[]");
+        if (users.some(u => u.email === email)) {
+          alert("User already exists.");
+          return;
+        }
+
+        users.push({ name, email, password, role });
+        localStorage.setItem("users", JSON.stringify(users));
+        alert("Registration successful. Please log in.");
+        registerSection.classList.add("hidden");
+        loginSection.classList.remove("hidden");
+      });
+
+      document.getElementById("loginForm").addEventListener("submit", e => {
+        e.preventDefault();
+        const email = document.getElementById("loginEmail").value;
+        const password = document.getElementById("loginPassword").value;
+
+        const users = JSON.parse(localStorage.getItem("users") || "[]");
+        const user = users.find(u => u.email === email && u.password === password);
+
+        if (!user) {
+          alert("Invalid credentials.");
+          return;
+        }
+
+        localStorage.setItem("session", JSON.stringify(user));
+        location.reload();
+      });
+
+      document.getElementById("logout").addEventListener("click", () => {
+        localStorage.removeItem("session");
+        location.reload();
+      });
+
+      document.getElementById("addProductBtn").addEventListener("click", () => {
+        const session = JSON.parse(localStorage.getItem("session"));
+        const name = document.getElementById("productName").value;
+        const price = document.getElementById("productPrice").value;
+
+        const allProducts = JSON.parse(localStorage.getItem("products") || "{}");
+        const userProducts = allProducts[session.email] || [];
+        userProducts.push({ name, price });
+        allProducts[session.email] = userProducts;
+
+        localStorage.setItem("products", JSON.stringify(allProducts));
+        loadProducts(session.email);
+      });
+
+      function loadProducts(email) {
+        const products = JSON.parse(localStorage.getItem("products") || "{}")[email] || [];
+        productList.innerHTML = products.map(p => `<li>${p.name} - ₹${p.price}</li>`).join("");
+      }
+    });
+  </script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+  <div class="max-w-2xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
+
+    <!-- Home Button -->
+    <div class="mb-6 text-right">
+      <a href="index.html" class="text-red-800 hover:underline font-medium">← Back to Home</a>
+    </div>
+
+    <!-- Login Section -->
+    <div id="loginSection">
+      <h2 class="text-2xl font-bold mb-4">Login</h2>
+      <form id="loginForm" class="space-y-4">
+        <input type="email" id="loginEmail" placeholder="Email" required class="w-full p-2 border rounded" />
+        <input type="password" id="loginPassword" placeholder="Password" required class="w-full p-2 border rounded" />
+        <button type="submit" class="w-full bg-red-800 text-white py-2 rounded hover:bg-red-700">Login</button>
+      </form>
+      <p class="mt-4 text-sm">New user? <button id="toRegister" class="text-red-800 hover:underline">Register here</button></p>
+    </div>
+
+    <!-- Register Section -->
+    <div id="registerSection" class="hidden">
+      <h2 class="text-2xl font-bold mb-4">Register</h2>
+      <form id="registerForm" class="space-y-4">
+        <input type="text" id="regName" placeholder="Full Name" required class="w-full p-2 border rounded" />
+        <input type="email" id="regEmail" placeholder="Email" required class="w-full p-2 border rounded" />
+        <input type="password" id="regPassword" placeholder="Password" required class="w-full p-2 border rounded" />
+        <select id="regRole" class="w-full p-2 border rounded">
+          <option value="user">User</option>
+          <option value="seller">Seller</option>
+        </select>
+        <button type="submit" class="w-full bg-red-800 text-white py-2 rounded hover:bg-red-700">Register</button>
+      </form>
+      <p class="mt-4 text-sm">Already have an account? <button id="toLogin" class="text-red-800 hover:underline">Login here</button></p>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboard" class="hidden">
+      <h2 class="text-2xl font-bold mb-4" id="welcome"></h2>
+      <button id="logout" class="mb-6 bg-gray-200 hover:bg-gray-300 py-1 px-3 rounded">Logout</button>
+
+      <!-- Seller Only Product Form -->
+      <div id="sellerForm" class="hidden">
+        <h3 class="text-xl font-semibold mb-2">Add Product</h3>
+        <input id="productName" placeholder="Product Name" class="w-full p-2 mb-2 border rounded" />
+        <input id="productPrice" type="number" placeholder="Price" class="w-full p-2 mb-4 border rounded" />
+        <button id="addProductBtn" class="bg-red-800 text-white px-4 py-2 rounded hover:bg-red-700">Add Product</button>
+        <h4 class="mt-6 font-semibold">Your Products:</h4>
+        <ul id="productList" class="list-disc list-inside text-sm mt-2"></ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

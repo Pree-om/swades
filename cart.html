@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart | स्वदेश</title>
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Hind:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #800000;
+            --primary-dark: #5a0000;
+            --secondary: #d4af37;
+            --accent: #e5d9b6;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9f9f9;
+        }
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+        .hindi-font {
+            font-family: 'Hind', sans-serif;
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover:after {
+            width: 100%;
+        }
+        .quantity-btn {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #ddd;
+            background-color: #f8f8f8;
+            cursor: pointer;
+        }
+        .quantity-input {
+            width: 40px;
+            text-align: center;
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+            border-left: none;
+            border-right: none;
+        }
+    </style>
+</head>
+<body class="antialiased text-gray-900">
+    <!-- Header Section -->
+    <header class="sticky top-0 z-50 bg-white shadow-sm">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center space-x-2">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-r from-red-900 to-yellow-600 flex items-center justify-center text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-5-9h10v2H7z"/>
+                            <path d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/>
+                        </svg>
+                    </div>
+                    <span class="text-2xl font-bold font-display text-gray-900 hindi-font">स्वदेश</span>
+                </a>
+                
+                <!-- Navigation Links -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="products.html" class="text-gray-700 hover:text-red-900 transition nav-link">Shop</a>
+                    <a href="handicrafts.html" class="text-gray-700 hover:text-red-900 transition nav-link">Handicrafts</a>
+                    <a href="textiles.html" class="text-gray-700 hover:text-red-900 transition nav-link">Textiles</a>
+                    <a href="artisans.html" class="text-gray-700 hover:text-red-900 transition nav-link">Artisans</a>
+                </nav>
+                
+                <!-- User Actions -->
+                <div class="flex items-center space-x-4">
+                    <!-- Profile Dropdown -->
+                    <div class="relative group">
+                        <a href="profile.html" class="text-gray-700 hover:text-red-900">
+                            <i id="profileIcon" class="fas fa-user text-xl"></i>
+                        </a>
+                        <div class="absolute right-0 mt-2 w-56 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-10">
+                            <a href="profile.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">My Profile</a>
+                            <a href="orders.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">My Orders</a>
+                            <a href="wishlist.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Wishlist</a>
+                            <div class="border-t border-gray-200 my-1"></div>
+                            <a href="#" id="logoutBtn" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</a>
+                        </div>
+                    </div>
+                    
+                    <a href="cart.html" class="relative text-red-900">
+                        <i class="fas fa-shopping-cart text-xl"></i>
+                        <span id="cartCount" class="absolute -top-2 -right-2 bg-red-900 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Cart Main Content -->
+    <main class="py-12">
+        <div class="container mx-auto px-4">
+            <h1 class="text-3xl font-bold font-display mb-8">Your Shopping Cart</h1>
+            
+            <div class="flex flex-col lg:flex-row gap-8">
+                <!-- Cart Items -->
+                <div class="lg:w-2/3">
+                    <div id="emptyCart" class="bg-white rounded-lg shadow-sm p-8 text-center hidden">
+                        <i class="fas fa-shopping-cart text-4xl text-gray-300 mb-4"></i>
+                        <h2 class="text-xl font-semibold mb-2">Your cart is empty</h2>
+                        <p class="text-gray-600 mb-6">Looks like you haven't added anything to your cart yet</p>
+                        <a href="products.html" class="inline-block bg-red-900 text-white px-6 py-3 rounded hover:bg-red-800 transition font-medium">
+                            Continue Shopping
+                        </a>
+                    </div>
+                    
+                    <div id="cartItems" class="bg-white rounded-lg shadow-sm overflow-hidden">
+                        <!-- Cart items will be dynamically inserted here -->
+                    </div>
+                </div>
+                
+                <!-- Order Summary -->
+                <div class="lg:w-1/3">
+                    <div id="orderSummary" class="bg-white rounded-lg shadow-sm p-6 hidden">
+                        <h2 class="text-xl font-semibold mb-4 border-b pb-2">Order Summary</h2>
+                        <div class="space-y-3 mb-6">
+                            <div class="flex justify-between">
+                                <span>Subtotal</span>
+                                <span id="subtotal">₹0</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Shipping</span>
+                                <span id="shipping">FREE</span>
+                            </div>
+                            <div class="flex justify-between border-t pt-3">
+                                <span class="font-semibold">Total</span>
+                                <span id="total" class="font-semibold">₹0</span>
+                            </div>
+                        </div>
+                        <button id="checkoutBtn" class="w-full bg-red-900 text-white py-3 rounded hover:bg-red-800 transition font-medium">
+                            Proceed to Checkout
+                        </button>
+                        <p class="text-sm text-gray-500 mt-4 text-center">or <a href="products.html" class="text-red-900 hover:underline">Continue Shopping</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-12 pb-6">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 font-display hindi-font">स्वदेश</h3>
+                    <p class="text-gray-400 mb-4">Celebrating India's rich heritage through authentic handcrafted products.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 font-display">Shop</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">All Products</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Textiles</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 font-display">Help</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Contact Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">FAQs</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-6 text-center">
+                <p class="text-gray-400 text-sm">© 2023 स्वदेश. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize cart if it doesn't exist
+            if (!localStorage.getItem('swadesh_cart')) {
+                localStorage.setItem('swadesh_cart', JSON.stringify([]));
+            }
+            
+            // Load cart items
+            loadCart();
+            updateCartCount();
+            
+            // Check login status and update profile icon
+            const isLoggedIn = localStorage.getItem('swadesh_session') === 'authenticated';
+            const profileIcon = document.getElementById('profileIcon');
+            
+            if (isLoggedIn && profileIcon) {
+                profileIcon.classList.add('text-red-900');
+                profileIcon.classList.remove('text-gray-700');
+            }
+
+            // Logout functionality
+            document.getElementById('logoutBtn')?.addEventListener('click', function(e) {
+                e.preventDefault();
+                localStorage.removeItem('swadesh_session');
+                window.location.href = 'profile.html';
+            });
+            
+            // Checkout button
+            document.getElementById('checkoutBtn')?.addEventListener('click', function() {
+                window.location.href = 'checkout.html';
+            });
+        });
+
+        function loadCart() {
+            const cart = JSON.parse(localStorage.getItem('swadesh_cart'));
+            const cartItemsContainer = document.getElementById('cartItems');
+            const emptyCart = document.getElementById('emptyCart');
+            const orderSummary = document.getElementById('orderSummary');
+            
+            if (cart.length === 0) {
+                emptyCart.classList.remove('hidden');
+                cartItemsContainer.classList.add('hidden');
+                orderSummary.classList.add('hidden');
+                return;
+            }
+            
+            emptyCart.classList.add('hidden');
+            cartItemsContainer.classList.remove('hidden');
+            orderSummary.classList.remove('hidden');
+            
+            // Clear existing items
+            cartItemsContainer.innerHTML = '';
+            
+            let subtotal = 0;
+            
+            cart.forEach((item, index) => {
+                const itemTotal = item.price * item.quantity;
+                subtotal += itemTotal;
+                
+                const cartItem = document.createElement('div');
+                cartItem.className = 'p-4 border-b last:border-b-0';
+                cartItem.innerHTML = `
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <div class="w-full sm:w-24 h-24 flex-shrink-0">
+                            <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover rounded">
+                        </div>
+                        <div class="flex-grow">
+                            <h3 class="font-semibold">${item.name}</h3>
+                            <p class="text-red-900 font-semibold mt-1">₹${item.price.toLocaleString('en-IN')}</p>
+                            <div class="flex items-center mt-3">
+                                <button class="quantity-btn decrease" data-index="${index}">-</button>
+                                <input type="number" value="${item.quantity}" min="1" class="quantity-input" data-index="${index}">
+                                <button class="quantity-btn increase" data-index="${index}">+</button>
+                                <button class="ml-auto text-red-900 hover:text-red-700 remove-item" data-index="${index}">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                            <div class="mt-2 text-right">
+                                <span class="font-semibold">₹${itemTotal.toLocaleString('en-IN')}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                cartItemsContainer.appendChild(cartItem);
+            });
+            
+            // Update summary
+            document.getElementById('subtotal').textContent = `₹${subtotal.toLocaleString('en-IN')}`;
+            document.getElementById('total').textContent = `₹${subtotal.toLocaleString('en-IN')}`;
+            
+            // Add event listeners to quantity buttons
+            document.querySelectorAll('.quantity-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    updateQuantity(index, this.classList.contains('increase') ? 1 : -1);
+                });
+            });
+            
+            // Add event listeners to quantity inputs
+            document.querySelectorAll('.quantity-input').forEach(input => {
+                input.addEventListener('change', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    const newQuantity = parseInt(this.value) || 1;
+                    updateQuantityManually(index, newQuantity);
+                });
+            });
+            
+            // Add event listeners to remove buttons
+            document.querySelectorAll('.remove-item').forEach(button => {
+                button.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    removeItem(index);
+                });
+            });
+        }
+        
+        function updateQuantity(index, change) {
+            const cart = JSON.parse(localStorage.getItem('swadesh_cart'));
+            const newQuantity = cart[index].quantity + change;
+            
+            if (newQuantity < 1) {
+                removeItem(index);
+                return;
+            }
+            
+            cart[index].quantity = newQuantity;
+            localStorage.setItem('swadesh_cart', JSON.stringify(cart));
+            loadCart();
+            updateCartCount();
+        }
+        
+        function updateQuantityManually(index, newQuantity) {
+            const cart = JSON.parse(localStorage.getItem('swadesh_cart'));
+            
+            if (newQuantity < 1) {
+                removeItem(index);
+                return;
+            }
+            
+            cart[index].quantity = newQuantity;
+            localStorage.setItem('swadesh_cart', JSON.stringify(cart));
+            loadCart();
+            updateCartCount();
+        }
+        
+        function removeItem(index) {
+            const cart = JSON.parse(localStorage.getItem('swadesh_cart'));
+            cart.splice(index, 1);
+            localStorage.setItem('swadesh_cart', JSON.stringify(cart));
+            loadCart();
+            updateCartCount();
+        }
+        
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('swadesh_cart'));
+            const count = cart.reduce((total, item) => total + item.quantity, 0);
+            document.getElementById('cartCount').textContent = count;
+        }
+    </script>
+</body>
+</html>
